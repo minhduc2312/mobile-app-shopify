@@ -5,12 +5,12 @@ import {
     StyleSheet
 } from "react-native";
 
-const Home = (props) => (
+const WishList = (props) => (
     <View style={styles.container}>
-        <Text>Home</Text>
+        <Text>WishList</Text>
     </View>
     )
-export default Home;
+export default WishList;
 
 const styles = StyleSheet.create({
     container: {
