@@ -4,25 +4,25 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const Home = (props) => (
+const ChechOut = (props) => (
   <View style={styles.container}>
-    <Text>Home</Text>
+    <Text>ChechOut</Text>
   </View>
 );
 
-const HomeStackNavigator = () => {
+const ChechOutStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="HomePage" component={Home} />
+      <Stack.Screen name="ChechOut" component={ChechOut} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStackNavigator;
+export default ChechOutStackNavigator;
 
 const styles = StyleSheet.create({
   container: {

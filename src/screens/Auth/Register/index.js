@@ -4,25 +4,25 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const Home = (props) => (
+const Register = (props) => (
   <View style={styles.container}>
-    <Text>Home</Text>
+    <Text>Register</Text>
   </View>
 );
 
-const HomeStackNavigator = () => {
+const RegisterStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="HomePage" component={Home} />
+      <Stack.Screen name="RegisterPage" component={Register} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStackNavigator;
+export default RegisterStackNavigator;
 
 const styles = StyleSheet.create({
   container: {
