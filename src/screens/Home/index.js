@@ -1,49 +1,36 @@
-import { useEffect, useState } from "react";
-import axios from '_plugins/axios'
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    SafeAreaView,
-    ScrollView,
-    ImageBackground,
-    Image,
-    Dimensions,
-    StatusBar
-} from "react-native";
-import BannerSection from "./components/BannerSection";
-const screen = Dimensions.get('screen');
+import React from "react";
+import { View, Text, StyleSheet, StatusBar, Dimensions } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Home = ({ navigation, onclick }) => {
-    const [products, setProducts] = useState([]);
+const Stack = createStackNavigator();
 
-    useEffect(() => {
-        axios.get('/admin/api/2022-10/products.json').then(res => setProducts(res.data.products))
-        return (() => {
-            setProducts([])
-        })
-    }, [])
-    useEffect(() => {
-    }, [products])
+const Home = (props) => (
+  <View style={styles.container}>
+    <Text>Home</Text>
+  </View>
+);
+const screen = Dimensions.get("screen");
+const HomeStackNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="HomePage" component={Home} />
+    </Stack.Navigator>
+  );
+};
 
-    return (
-        <ScrollView style={styles.container}>
-            <BannerSection source={products[0]?.image.src} />
-        </ScrollView>
-    )
-
-
-}
-export default Home;
+export default HomeStackNavigator;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-    },
-    image: {
-        width: screen.width,
-        height: screen.height
-    }
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  image: {
+    width: screen.width,
+    height: screen.height,
+  },
 });
