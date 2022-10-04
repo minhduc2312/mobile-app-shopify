@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StatusBar, Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -9,7 +9,7 @@ const Home = (props) => (
         <Text>Home</Text>
     </View>
 );
-
+const screen = Dimensions.get('screen')
 const HomeStackNavigator = () => {
     return (
         <Stack.Navigator

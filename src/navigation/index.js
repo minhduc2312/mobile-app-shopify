@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-export { default as BottomTabNavigator } from "./BottomTabNavigator";
-export { DrawerNavigatorAndroid, DrawerNavigatorIOS } from "./DrawerNavigator";
-=======
 import React from "react";
 import {
     View,
@@ -79,4 +75,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 });
->>>>>>> cb445ba5ede4d459f23ac64c1d8fb7151d7ae8d3

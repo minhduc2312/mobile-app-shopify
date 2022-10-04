@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from "react";
 import {
   Button,
@@ -9,7 +10,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { BottomTabNavigator } from "_navigation";
-
 const DrawerNavigatorAndroid = () => {
   const drawer = useRef(null);
   const [drawerPosition, setDrawerPosition] = useState("left");
