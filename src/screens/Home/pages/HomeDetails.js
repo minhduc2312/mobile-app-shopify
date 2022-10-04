@@ -2,14 +2,15 @@ import React from "react";
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    SafeAreaView
 } from "react-native";
 
 
 const HomeDetailsScreen = (props) => (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <Text>HomeDetailScreen</Text>
-    </View>
+    </SafeAreaView>
 )
 export default HomeDetailsScreen;
 

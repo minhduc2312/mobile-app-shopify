@@ -10,7 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { WishListScreen, NotificationScreen, MoreScreen } from '../screens'
-import HomeStack from "../screens/Home/HomeStack";
+import HomeStack from "./NavigationStack/HomeStack";
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = (props) => (

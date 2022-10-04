@@ -1,28 +1,49 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import axios from '_plugins/axios'
 import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    SafeAreaView,
+    ScrollView,
+    ImageBackground,
+    Image,
+    Dimensions,
+    StatusBar
 } from "react-native";
+import BannerSection from "./components/BannerSection";
+const screen = Dimensions.get('screen');
+
+const Home = ({ navigation, onclick }) => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get('/admin/api/2022-10/products.json').then(res => setProducts(res.data.products))
+        return (() => {
+            setProducts([])
+        })
+    }, [])
+    useEffect(() => {
+    }, [products])
+
+    return (
+        <ScrollView style={styles.container}>
+            <BannerSection source={products[0]?.image.src} />
+        </ScrollView>
+    )
 
 
-const Home = ({ navigation, onclick }) => (
-    <View style={styles.container}>
-        <Text>Home</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('HomeDetails')}>
-            <Text>
-                Details
-            </Text>
-        </TouchableOpacity>
-    </View>
-)
+}
 export default Home;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    },
+    image: {
+        width: screen.width,
+        height: screen.height
     }
 });
