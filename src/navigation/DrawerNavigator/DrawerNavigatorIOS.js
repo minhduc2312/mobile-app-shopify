@@ -9,7 +9,7 @@ import {
   ProductScreen,
   CartScreen
 } from "_screens";
-import { BottomTabNavigator } from "_navigation";
+import BottomTabNavigator from "../BottomTabNavigator";
 
 const Drawer = createDrawerNavigator();
 
