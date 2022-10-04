@@ -4,25 +4,25 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const Home = (props) => (
+const Cart = (props) => (
   <View style={styles.container}>
-    <Text>Home</Text>
+    <Text>Cart</Text>
   </View>
 );
 
-const HomeStackNavigator = () => {
+const CartStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="HomePage" component={Home} />
+      <Stack.Screen name="Cart" component={Cart} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStackNavigator;
+export default CartStackNavigator;
 
 const styles = StyleSheet.create({
   container: {
