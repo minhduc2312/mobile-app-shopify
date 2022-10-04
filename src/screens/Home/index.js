@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, StatusBar, Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+import BannerSection from "_screens/Home/components/BannerSection";
 
 const Stack = createStackNavigator();
 
 const Home = (props) => (
   <View style={styles.container}>
-    <Text>Home</Text>
+    <BannerSection></BannerSection>
   </View>
 );
 const screen = Dimensions.get("screen");
