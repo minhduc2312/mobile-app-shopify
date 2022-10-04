@@ -9,7 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { BottomTabNavigator } from "_navigation";
+import BottomTabNavigator from "../BottomTabNavigator";
 const DrawerNavigatorAndroid = () => {
   const drawer = useRef(null);
   const [drawerPosition, setDrawerPosition] = useState("left");
