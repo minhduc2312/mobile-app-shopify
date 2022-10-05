@@ -17,9 +17,9 @@ import {
 import BottomTabNavigator from "../BottomTabNavigator";
 import HomeStack from "../NavigationStack/HomeStack";
 import ProductStack from "../NavigationStack/ProductStack";
+import { StyleSheet, TouchableOpacity, Image, View, Text } from "react-native";
 
 const Drawer = createDrawerNavigator();
-
 const CustomDrawerContent = (props) => {
   return (
     <DrawerContentScrollView {...props} style={{ marginTop: 0 }}>
@@ -65,7 +65,7 @@ const DrawerNavigatorIOS = (navigation) => {
     <Drawer.Navigator
       screenOptions={({ navigation }) => ({
         headerStyle: {
-          height: 70,
+          height: 100
         },
         headerLeft: () => (
           <TouchableOpacity
@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   menuHeaderText: {
-    fontFamily: "TenorSans",
     color: "#fff",
     fontSize: 30,
   },
@@ -183,11 +182,9 @@ const styles = StyleSheet.create({
   // drawer content
   drawerLabel: {
     fontSize: 14,
-    fontFamily: "TenorSans",
   },
   drawerLabelFocused: {
     fontSize: 14,
-    fontFamily: "TenorSans",
     color: "#551E18",
     fontWeight: "500",
   },
