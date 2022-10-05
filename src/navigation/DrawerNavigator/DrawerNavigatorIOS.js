@@ -14,8 +14,9 @@ import {
   ProductScreen,
   CartScreen,
 } from "_screens";
-import { BottomTabNavigator } from "_navigation";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import BottomTabNavigator from "../BottomTabNavigator";
+import HomeStack from "../NavigationStack/HomeStack";
+import ProductStack from "../NavigationStack/ProductStack";
 
 const Drawer = createDrawerNavigator();
 

@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     },
     banner: {
         width: Dimensions.get('screen').width,
-        height: 350,
+        height: 300,
     },
     image: {
         width: '100%',

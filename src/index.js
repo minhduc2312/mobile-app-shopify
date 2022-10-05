@@ -4,9 +4,8 @@ import { View, StyleSheet, Platform } from "react-native";
 import { useFonts, userFonts } from "expo-font";
 
 import {
-  DrawerNavigatorIOS,
-  DrawerNavigatorAndroid,
-  BottomTabNavigation,
+    DrawerNavigatorIOS,
+    DrawerNavigatorAndroid,
 } from "_navigation";
 
 export default function App() {
