@@ -9,8 +9,15 @@ import {
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 const SkeletonImage = () => (
-    <SkeletonPlaceholder style={styles.container}>
-        <View style={{ width: "100%", height: '100%' }}>
+    <SkeletonPlaceholder >
+        <View style={{
+            width: 180,
+            height: 200,
+            // paddingHorizontal: 5,
+            marginLeft: 10,
+            borderRadius: 10,
+            shadowRadius: 100
+        }}>
         </View>
     </SkeletonPlaceholder>
 )
@@ -18,13 +25,13 @@ const SkeletonImage = () => (
 const Product = ({ title, image }) => {
     return (
         <View style={styles.container}>
-            {!image ? (
+            {image ? (
                 <Image style={styles.image} source={{ uri: image }} />
             ) : (
                 <SkeletonImage />
             )}
-
-            <Text>clothes</Text>
+            {/* <SkeletonImage /> */}
+            <Text>{title}</Text>
         </View>
     )
 }
@@ -32,13 +39,15 @@ export default Product;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 10,
+        marginTop: 25,
         alignItems: 'center',
+        width: 180,
+        height: 200,
+        paddingHorizontal: 5
     },
     image: {
-        flex: 1,
-        height: 60,
-        width: 120,
+        width: '100%',
+        height: "100%",
         borderRadius: 10,
         shadowRadius: 100
     }

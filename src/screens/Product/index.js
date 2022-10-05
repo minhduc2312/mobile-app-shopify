@@ -1,33 +1,40 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image
+} from "react-native";
+import { ProductHome, ProductDetail } from "./pages";
+
+import { HeaderBackButton } from '@react-navigation/elements';
 
 const Stack = createStackNavigator();
 
-const Product = (props) => (
-  <View style={styles.container}>
-    <Text>Product</Text>
-  </View>
-);
-
-const ProductStackNavigator = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Product" component={Product} />
-    </Stack.Navigator>
-  );
-};
-
-export default ProductStackNavigator;
+const ProductScreen = ({ navigation }) => (
+  <Stack.Navigator screenOptions={{
+    headerLeft: ({ canGoBack, onPress }) => {
+      return canGoBack ? <HeaderBackButton style={styles.button} onPress={onPress}>
+      </HeaderBackButton> : undefined
+    },
+  }}>
+    <Stack.Screen name="ProductHome" component={ProductHome} options={{
+      headerLeft: () => (
+        <HeaderBackButton style={styles.button} onPress={() => navigation.jumpTo('HomeStack')}>
+        </HeaderBackButton>
+      )
+    }}></Stack.Screen>
+    <Stack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: true }}></Stack.Screen>
+  </Stack.Navigator>
+)
+export default ProductScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });

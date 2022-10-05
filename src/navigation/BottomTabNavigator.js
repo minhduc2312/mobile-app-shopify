@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
+import IconBell from "react-native-vector-icons/Fontisto";
 import {
   HomeScreen,
   WishListScreen,
@@ -46,8 +47,7 @@ const BottomTabNavigation = ({ onPress }) => (
       component={HomeScreen}
       options={{
         tabBarLabel: "Home",
-        tabBarLabelStyle: { fontFamily: "TenorSans" },
-        tabBarIcon: ({ color }) => <Icon name="home" color={color} size={24} />,
+        tabBarIcon: ({ color, focused }) => <Icon name={focused ? "home" : 'home-outline'} color={color} size={26} />,
       }}
     />
     <Tab.Screen
@@ -55,9 +55,8 @@ const BottomTabNavigation = ({ onPress }) => (
       component={WishListScreen}
       options={{
         tabBarLabel: "WishList",
-        tabBarLabelStyle: { fontFamily: "TenorSans" },
-        tabBarIcon: ({ color }) => (
-          <Icon name="heart" color={color} size={24} />
+        tabBarIcon: ({ color, focused }) => (
+          <Icon name={focused ? "heart" : 'heart-outline'} color={color} size={26} />
         ),
       }}
     />
@@ -66,8 +65,8 @@ const BottomTabNavigation = ({ onPress }) => (
       component={NotificationScreen}
       options={{
         tabBarLabel: "Notification",
-        tabBarLabelStyle: { fontFamily: "TenorSans" },
-        tabBarIcon: ({ color }) => <Icon name="bell" color={color} size={24} />,
+        tabBarBadge: 3,
+        tabBarIcon: ({ color, focused }) => <IconBell name={focused ? 'bell-alt' : 'bell'} color={color} size={26} />,
       }}
     />
     <Tab.Screen
@@ -75,9 +74,8 @@ const BottomTabNavigation = ({ onPress }) => (
       component={MoreScreen}
       options={{
         tabBarLabel: "More",
-        tabBarLabelStyle: { fontFamily: "TenorSans" },
-        tabBarIcon: ({ color }) => (
-          <Icon name="ellipsis-h" color={color} size={24} />
+        tabBarIcon: ({ color, focused }) => (
+          <Icon name={focused ? "ellipsis-horizontal" : "ellipsis-horizontal-outline"} color={color} size={32} />
         ),
       }}
     />

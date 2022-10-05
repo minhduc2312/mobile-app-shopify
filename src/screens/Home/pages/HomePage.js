@@ -29,7 +29,7 @@ const HomePage = (props) => {
     }, []);
 
     useEffect(() => {
-        if (refreshing) {
+        if (!refreshing) {
             axios.get('/admin/api/2022-10/products.json').then(res => {
                 const products = res.data.products
                 setProducts(products);
@@ -37,6 +37,11 @@ const HomePage = (props) => {
                 setCategories(Array.from(Array(10)).map((_, index) => (products[getRandom(products.length)])));
 
             });
+        }
+        return () => {
+            setBanners("");
+            setProducts([]);
+            setCategories([])
         }
     }, [refreshing])
 
@@ -57,10 +62,9 @@ const HomePage = (props) => {
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 flexWrap: 'wrap',
-
             }}>
                 {Array.from(Array(10)).map((item, index) => (
-                    <Product key={index} image={categories[index]?.image.src} />
+                    <Product key={index} title={categories[index]?.title} image={categories[index]?.image.src} />
                 ))}
             </View>
         </ScrollView>

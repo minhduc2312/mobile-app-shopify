@@ -1,33 +1,35 @@
-import { StyleSheet, Dimensions} from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import BannerSection from "_screens/Home/components/BannerSection";
-import axios from "_plugins/axios";
-
+import React from "react";
+import {
+    View,
+    Text,
+    StyleSheet
+} from "react-native";
 import HomePage from "./pages/HomePage";
+import HomeDetails from "./pages/HomeDetails";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const screen = Dimensions.get('screen')
-const HomeStackNavigator = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="HomePage" component={HomePage} />
-    </Stack.Navigator>
-  );
-};
-
-export default HomeStackNavigator;
+const HomeStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }}></Stack.Screen>
+            <Stack.Screen name="HomeDetails" component={HomeDetails}
+                options={({ route }) => ({
+                    headerTitleAlign: 'center',
+                    title: route.params?.title,
+                })
+                }
+            ></Stack.Screen>
+        </Stack.Navigator>
+    )
+}
+export default HomeStack;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    image: {
-        width: screen.width,
-        height: screen.height
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

@@ -7,16 +7,14 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import {
-  HomeScreen,
+  ProductScreen,
   LoginScreen,
   RegisterScreen,
   AccountScreen,
-  ProductScreen,
   CartScreen,
 } from "_screens";
 import BottomTabNavigator from "../BottomTabNavigator";
-import HomeStack from "../NavigationStack/HomeStack";
-import ProductStack from "../NavigationStack/ProductStack";
+import { Image, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 
 const Drawer = createDrawerNavigator();
 
@@ -65,7 +63,7 @@ const DrawerNavigatorIOS = (navigation) => {
     <Drawer.Navigator
       screenOptions={({ navigation }) => ({
         headerStyle: {
-          height: 70,
+          height: 100,
         },
         headerLeft: () => (
           <TouchableOpacity
@@ -84,7 +82,7 @@ const DrawerNavigatorIOS = (navigation) => {
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="Home"
+        name="HomeScreen"
         component={BottomTabNavigator}
         options={{
           title: "Home",
@@ -103,6 +101,14 @@ const DrawerNavigatorIOS = (navigation) => {
         component={LoginScreen}
         options={{
           title: "New Threads",
+        }}
+      />
+      <Drawer.Screen
+        name="Product"
+        component={ProductScreen}
+        options={{
+          title: "All Product",
+          headerShown: false
         }}
       />
       <Drawer.Screen
@@ -161,7 +167,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   menuHeaderText: {
-    fontFamily: "TenorSans",
     color: "#fff",
     fontSize: 30,
   },
@@ -183,12 +188,10 @@ const styles = StyleSheet.create({
   // drawer content
   drawerLabel: {
     fontSize: 14,
-    fontFamily: "TenorSans",
   },
   drawerLabelFocused: {
     fontSize: 14,
-    fontFamily: "TenorSans",
-    color: "#551E18",
+    color: "#fff",
     fontWeight: "500",
   },
   drawerItem: {
