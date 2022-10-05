@@ -34,7 +34,8 @@
     "react-native-loading-placeholder": "^0.0.6",
     "react-native-skeleton-placeholder": "^3.0.4",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.18.7"
+    "react-native-web": "~0.18.7",
+    "expo-font": "~10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

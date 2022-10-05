@@ -46,6 +46,7 @@ const BottomTabNavigation = ({ onPress }) => (
       component={HomeScreen}
       options={{
         tabBarLabel: "Home",
+        tabBarLabelStyle: { fontFamily: "TenorSans" },
         tabBarIcon: ({ color }) => <Icon name="home" color={color} size={24} />,
       }}
     />
@@ -54,6 +55,7 @@ const BottomTabNavigation = ({ onPress }) => (
       component={WishListScreen}
       options={{
         tabBarLabel: "WishList",
+        tabBarLabelStyle: { fontFamily: "TenorSans" },
         tabBarIcon: ({ color }) => (
           <Icon name="heart" color={color} size={24} />
         ),
@@ -64,6 +66,7 @@ const BottomTabNavigation = ({ onPress }) => (
       component={NotificationScreen}
       options={{
         tabBarLabel: "Notification",
+        tabBarLabelStyle: { fontFamily: "TenorSans" },
         tabBarIcon: ({ color }) => <Icon name="bell" color={color} size={24} />,
       }}
     />
@@ -72,6 +75,7 @@ const BottomTabNavigation = ({ onPress }) => (
       component={MoreScreen}
       options={{
         tabBarLabel: "More",
+        tabBarLabelStyle: { fontFamily: "TenorSans" },
         tabBarIcon: ({ color }) => (
           <Icon name="ellipsis-h" color={color} size={24} />
         ),
