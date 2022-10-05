@@ -23,7 +23,7 @@ const isShowHeader = Platform.OS === "android";
 const BottomTabNavigation = ({ onPress }) => (
   <Tab.Navigator
     screenOptions={{
-      tabBarActiveTintColor: "#551E18",
+      tabBarActiveTintColor: "tomato",
       headerShown: isShowHeader,
       tabBarInActiveTintColor: "grey",
       headerTitleAlign: "center",
@@ -42,7 +42,7 @@ const BottomTabNavigation = ({ onPress }) => (
     }}
   >
     <Tab.Screen
-      name="Home"
+      name="HomeScreen"
       component={HomeScreen}
       options={{
         tabBarLabel: "Home",
