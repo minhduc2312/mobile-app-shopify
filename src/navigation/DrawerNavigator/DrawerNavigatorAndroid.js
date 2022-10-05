@@ -1,6 +1,6 @@
-
 import React, { useRef, useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import {
@@ -27,6 +27,8 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigatorAndroid = () => {
   const drawer = useRef(null);
+  const navigation = useNavigation();
+
   const [drawerPosition, setDrawerPosition] = useState("left");
   const changeDrawerPosition = () => {
     if (drawerPosition === "left") {
@@ -36,40 +38,18 @@ const DrawerNavigatorAndroid = () => {
     }
   };
 
-  const navigationView = () => (
+  const navigationView = (props) => (
     <View style={[styles.container, styles.navigationContainer]}>
-      <Text>Hello World</Text>
-      {/* <Drawer.Navigator>
-        <Drawer.Screen
-          name="Home"
-          component={BottomTabNavigator}
-          options={{
-            title: "Home",
-            headerTitle: () => (
-              <Image
-                source={require("_assets/images/shopLogo.png")}
-                style={styles.logoImageResize}
-              />
-            ),
-            headerRight: () => (
-              <View style={styles.headerRight}>
-                <Icon name="bell" size={20} color="#fff" />
-              </View>
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            title: "Login",
-          }}
-        />
-        <Drawer.Screen name="Register" component={RegisterScreen} />
-        <Drawer.Screen name="Account" component={AccountScreen} />
-        <Drawer.Screen name="Products" component={ProductScreen} />
-        <Drawer.Screen name="Cart" component={CartScreen} />
-      </Drawer.Navigator> */}
+      <TouchableOpacity
+        onPress={(props) => {
+          navigation.navigate("HomeScreen", {
+            screen: "HomeDetails",
+          });
+          drawer.current.closeDrawer();
+        }}
+      >
+        <Text>Hello World</Text>
+      </TouchableOpacity>
     </View>
   );
 
