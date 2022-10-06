@@ -1,8 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import DrawerContent from "_navigation/DrawerNavigator/DrawerContent";
 import MainTabScreen from "./navigation/MainTabScreen"
+import { HeaderBackButton } from '@react-navigation/elements';
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { ProductStackScreen, MenStackScreen, WomenStackScreen } from "./screens";
@@ -14,8 +15,17 @@ export default function App() {
     return (
         <NavigationContainer style={styles.container}>
             <StatusBar style="dark"></StatusBar>
-            <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-                <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+            <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}
+                screenOptions={{
+                    headerShown: false,
+                    headerTitle: () => (
+                        <Image source={require('_assets/images/shopLogo.png')} style={{ height: '80%' }} resizeMode="contain" />
+                    ),
+                    headerTitleAlign: 'center'
+                }}
+            >
+                <Drawer.Screen name="HomeDrawer" component={MainTabScreen}
+                    options={{ headerShown: true }} />
                 <Drawer.Screen name="ProductsDrawer" component={ProductStackScreen} />
                 <Drawer.Screen name="MenDrawer" component={MenStackScreen} />
                 <Drawer.Screen name="WomenDrawer" component={WomenStackScreen} />

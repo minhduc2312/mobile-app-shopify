@@ -7,11 +7,17 @@ import {
 } from "react-native";
 import ShoesScreen from "./pages/Shoes";
 import ClothingScreen from "./pages/Clothing";
-
+import { HeaderBackButton } from '@react-navigation/elements';
 const WomenStack = createStackNavigator();
 
-const WomenStackScreen = (props) => (
-    <WomenStack.Navigator>
+const WomenStackScreen = ({ navigation, onPress }) => (
+    <WomenStack.Navigator screenOptions={{
+        headerLeft: (canGoBack) => {
+            return canGoBack ? <HeaderBackButton style={styles.button} onPress={onPress}>
+            </HeaderBackButton> : <HeaderBackButton style={styles.button} onPress={() => navigation.navigate('HomeDrawer')}>
+            </HeaderBackButton>
+        }
+    }}>
         <WomenStack.Screen name="Shoes" component={ShoesScreen} />
         <WomenStack.Screen name="Clothing" component={ClothingScreen} />
     </WomenStack.Navigator>

@@ -12,7 +12,6 @@ const DrawerContent = (props) => (
     <View style={styles.container}>
         <DrawerContentScrollView {...props} style={{ width: "100%" }}>
             <Drawer.Section style={{ flex: 1, width: "100%" }}>
-
                 {MenuNavigator.map((menu) => (
                     <DrawerItem
                         key={menu.title}
