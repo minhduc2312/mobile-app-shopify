@@ -10,7 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const HomeStack = () => {
+const HomeStackScreen = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }}></Stack.Screen>
@@ -24,7 +24,7 @@ const HomeStack = () => {
         </Stack.Navigator>
     )
 }
-export default HomeStack;
+export default HomeStackScreen;
 
 const styles = StyleSheet.create({
     container: {

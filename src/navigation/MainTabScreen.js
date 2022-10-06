@@ -12,7 +12,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 import IconBell from "react-native-vector-icons/Fontisto";
 import {
-  HomeScreen,
+  HomeStackScreen,
   WishListScreen,
   NotificationScreen,
   MoreScreen,
@@ -44,7 +44,7 @@ const BottomTabNavigation = ({ onPress }) => (
   >
     <Tab.Screen
       name="HomeScreen"
-      component={HomeScreen}
+      component={HomeStackScreen}
       options={{
         tabBarLabel: "Home",
         tabBarIcon: ({ color, focused }) => <Icon name={focused ? "home" : 'home-outline'} color={color} size={26} />,

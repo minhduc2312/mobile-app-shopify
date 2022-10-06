@@ -1,23 +1,28 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
+import DrawerContent from "_navigation/DrawerNavigator/DrawerContent";
+import MainTabScreen from "./navigation/MainTabScreen"
 
-import {
-    DrawerNavigatorIOS,
-    DrawerNavigatorAndroid,
-} from "_navigation";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { ProductStackScreen, MenStackScreen, WomenStackScreen } from "./screens";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
 
     return (
         <NavigationContainer style={styles.container}>
             <StatusBar style="dark"></StatusBar>
-            {/* <BottomTabNavigation /> */}
-            {Platform.OS === "ios" ? (
-                <DrawerNavigatorIOS />
-            ) : (
-                <DrawerNavigatorAndroid />
-            )}
+            <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+                <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+                <Drawer.Screen name="ProductsDrawer" component={ProductStackScreen} />
+                <Drawer.Screen name="MenDrawer" component={MenStackScreen} />
+                <Drawer.Screen name="WomenDrawer" component={WomenStackScreen} />
+                {/* <Drawer.Screen name="SignInDrawer" component={SignInScreen} />
+                <Drawer.Screen name="SignUpDrawer" component={SignUpScreen} /> */}
+
+            </Drawer.Navigator>
         </NavigationContainer>
     );
 }

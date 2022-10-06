@@ -14,59 +14,60 @@ import {
   FlatList,
 } from "react-native";
 
-import BottomTabNavigator from "../BottomTabNavigator";
+import BottomTabNavigator from "../MainTabScreen";
 import { useNavigation } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
 
-const DATA = [
+const MenuNavigator = [
   {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "Home",
-    navigation: "HomeScreen"
+    title: "All Products",
+    navigate: "Products"
   },
   {
-    id: "bd7azzzzea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "All Product",
-    navigation: "ProductHome"
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "New Threads",
-    navigation: ""
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Special Occasions",
-    navigation: ""
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96112-145571e29d72",
-    title: "Best Sellers",
-    navigation: ""
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e292322",
-    title: "Clothing",
-    navigation: ""
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-1231e29d72",
-    title: "Shoes",
-    navigation: ""
-  },
-  {
-    id: "58694a0f-3da1-471f-11bd9612571e29d72",
-    title: "Accessories",
-    navigation: ""
-  },
-  {
-    id: "58694a0f-3da1-471f1296-145571e29d72",
-    title: "Sale",
-    navigation: ""
-  },
+    title: "Categories",
+    submenu: [
+      {
+        title: "Shoes",
+        navigation: "Category/Shoes"
 
+      },
+      {
+        title: "Clothing",
+        navigation: "Category/Clothing"
+      }
+    ],
+  },
+  {
+    title: "Men",
+    navigation: "Men",
+    submenu: [
+      {
+        title: "Shoes",
+        navigation: "Men/Shoes"
 
+      },
+      {
+        title: "Clothing",
+        navigation: "Men/Clothing"
+      }
+    ]
+  },
+  {
+    title: "Women",
+    navigation: "Women",
+    submenu: [
+      {
+        title: "Shoes",
+        navigation: "Women/Shoes"
+
+      },
+      {
+        title: "Clothing",
+        navigation: "Women/Clothing"
+      }
+    ]
+  }
 ];
 
 const MenuItem = ({ item, onPress, backgroundColor, textColor }) => (

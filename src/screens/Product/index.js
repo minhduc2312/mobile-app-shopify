@@ -10,26 +10,28 @@ import {
 import { ProductHome, ProductDetail } from "./pages";
 
 import { HeaderBackButton } from '@react-navigation/elements';
+import CategoryStackScreen from "./StackSCreen/CategoryStackScreen";
 
-const Stack = createStackNavigator();
+const ProductStack = createStackNavigator();
 
-const ProductScreen = ({ navigation }) => (
-  <Stack.Navigator screenOptions={{
+const ProductStackScreen = ({ navigation }) => (
+  <ProductStack.Navigator screenOptions={{
     headerLeft: ({ canGoBack, onPress }) => {
       return canGoBack ? <HeaderBackButton style={styles.button} onPress={onPress}>
       </HeaderBackButton> : undefined
     },
   }}>
-    <Stack.Screen name="ProductHome" component={ProductHome} options={{
+    <ProductStack.Screen name="ProductHome" component={ProductHome} options={{
       headerLeft: () => (
-        <HeaderBackButton style={styles.button} onPress={() => navigation.jumpTo('HomeStack')}>
+        <HeaderBackButton style={styles.button} onPress={() => navigation.jumpTo('HomeDrawer')}>
         </HeaderBackButton>
       )
-    }}></Stack.Screen>
-    <Stack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: true }}></Stack.Screen>
-  </Stack.Navigator>
+    }}></ProductStack.Screen>
+    <ProductStack.Screen name="ProductCategory" component={CategoryStackScreen} />
+    <ProductStack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: true }}></ProductStack.Screen>
+  </ProductStack.Navigator>
 )
-export default ProductScreen;
+export default ProductStackScreen;
 
 const styles = StyleSheet.create({
   container: {

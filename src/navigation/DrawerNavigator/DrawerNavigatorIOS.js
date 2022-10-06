@@ -13,7 +13,7 @@ import {
   AccountScreen,
   CartScreen,
 } from "_screens";
-import BottomTabNavigator from "../BottomTabNavigator";
+import BottomTabNavigator from "../MainTabScreen";
 import { Image, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 
 const Drawer = createDrawerNavigator();
