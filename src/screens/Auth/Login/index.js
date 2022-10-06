@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -10,15 +10,17 @@ const Login = (props) => (
   </View>
 );
 
-const LoginStackNavigator = () => {
+const LoginStackNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="LoginPage" component={Login} />
-    </Stack.Navigator>
+    <>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="LoginPage" component={Login} />
+      </Stack.Navigator>
+    </>
   );
 };
 

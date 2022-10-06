@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import {
   NotificationScreen,
   MoreScreen,
 } from "../screens";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 const isShowHeader = Platform.OS === "android";
