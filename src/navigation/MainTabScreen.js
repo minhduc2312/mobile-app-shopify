@@ -20,13 +20,13 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
-const isShowHeader = Platform.OS === "android";
+// const isShowHeader = Platform.OS === "android";
 
 const BottomTabNavigation = ({ onPress }) => (
   <Tab.Navigator
     screenOptions={{
       tabBarActiveTintColor: "tomato",
-      headerShown: isShowHeader,
+      headerShown: false,
       tabBarInActiveTintColor: "grey",
       headerTitleAlign: "center",
       tabBarStyle: {
