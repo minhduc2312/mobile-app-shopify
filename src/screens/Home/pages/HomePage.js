@@ -2,7 +2,14 @@ import BannerSection from "../components/BannerSection";
 import axios from "_plugins/axios";
 import Product from "../components/Product";
 import { useCallback, useEffect, useState } from "react";
-import { Dimensions, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const getRandom = (max) => Math.floor(Math.random() * max);
@@ -57,8 +64,7 @@ const HomePage = (props) => {
         style={{
           flex: 1,
           flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
+          justifyContent: "space-around",
           flexWrap: "wrap",
         }}
       >

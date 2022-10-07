@@ -23,7 +23,9 @@ const Product = ({ title, image }) => {
       {image ? (
         <Image style={styles.image} source={{ uri: image }} />
       ) : (
-        <SkeletonImage />
+        <>
+          <SkeletonImage />
+        </>
       )}
       {/* <SkeletonImage /> */}
       <Text>{title}</Text>
