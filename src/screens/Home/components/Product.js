@@ -26,9 +26,16 @@ const SkeletonImage = () => (
   </SkeletonPlaceholder>
 );
 
-const Product = ({ product, onPress }) => {
-  // console.log(product)
-  // const navigation = useNavigation();
+const Product = ({ product }) => {
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.navigate("Product", {
+      screen: "ProductDetail",
+      params: {
+        ...product,
+      },
+    });
+  };
   return (
     <View style={styles.container}>
       {product?.image.src ? (

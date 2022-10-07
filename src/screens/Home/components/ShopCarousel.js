@@ -132,6 +132,5 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     aspectRatio: 1,
-    backgroundColor: "red",
   },
 });

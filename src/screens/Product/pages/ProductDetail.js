@@ -18,7 +18,6 @@ const ProductDetail = ({ route, navigation }) => {
 
     const [selectedItem, setSelectedItem] = useState(0)
     const product = route.params
-    // console.log(navigation);
     useEffect(() => {
         navigation.setOptions({ title: product?.title })
 
@@ -27,10 +26,7 @@ const ProductDetail = ({ route, navigation }) => {
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.imageSection}>
                 <Image source={{ uri: product?.image.src }} style={styles.image} />
-                {/* {product?.images.map((image, index) => (
-                <Image key={index} source={{ uri: image.src }} />
-            ))} */}
-                {/* <Text>{product?.image.src}</Text> */}
+                
                 <View style={styles.subImageSection} >
                     {product?.images.map((image, index) => (
                         <Image key={index} source={{ uri: image.src }} style={styles.subImage} />

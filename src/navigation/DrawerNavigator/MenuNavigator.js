@@ -1,51 +1,41 @@
 export const MenuNavigator = [
   {
     title: "All Products",
-    navigation: "ProductStack",
-    icon: "home-outline",
+    navigation: "Product",
+    icon: require("_assets/images/menu/drawer/all-product.png"),
   },
   {
-    title: "Categories",
-    icon: "albums-outline",
-    submenu: [
-      {
-        title: "Shoes",
-        navigation: "Category/Shoes",
-      },
-      {
-        title: "Clothing",
-        navigation: "Category/Clothing",
-      },
-    ],
+    title: "Bracelet",
+    navigation: "Bracelet",
+    icon: require("_assets/images/menu/drawer/bracelet.png"),
   },
   {
-    title: "Men",
-    navigation: "MenStack",
-    icon: "male",
-    submenu: [
-      {
-        title: "Shoes",
-        navigation: "Men/Shoes",
-      },
-      {
-        title: "Clothing",
-        navigation: "Men/Clothing",
-      },
-    ],
+    title: "Earring",
+    navigation: "Earring",
+    icon: require("_assets/images/menu/drawer/earrings.png"),
   },
   {
-    title: "Women",
-    navigation: "WomenStack",
-    icon: "female",
-    submenu: [
-      {
-        title: "Shoes",
-        navigation: "Women/Shoes",
-      },
-      {
-        title: "Clothing",
-        navigation: "Women/Clothing",
-      },
-    ],
+    title: "Necklace",
+    navigation: "Necklace",
+    icon: require("_assets/images/menu/drawer/necklace.png"),
   },
+  {
+    title: "Others",
+    navigation: "Others",
+    icon: require("_assets/images/menu/drawer/others.png"),
+  },
+  // {
+  //   title: "Categories",
+  //   icon: "albums-outline",
+  //   submenu: [
+  //     {
+  //       title: "Shoes",
+  //       navigation: "Category/Shoes",
+  //     },
+  //     {
+  //       title: "Clothing",
+  //       navigation: "Category/Clothing",
+  //     },
+  //   ],
+  // },
 ];

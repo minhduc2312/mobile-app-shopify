@@ -9,7 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/webpack-config": "^0.16.19",
+    "@expo/webpack-config": "^0.17.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/drawer": "^6.5.0",
@@ -27,6 +27,7 @@
     "react-native": "0.69.6",
     "react-native-anchor-carousel": "^4.0.1",
     "react-native-dotenv": "^3.3.1",
+    "react-native-dropdown-picker": "^5.4.2",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-loading-placeholder": "^0.0.6",
