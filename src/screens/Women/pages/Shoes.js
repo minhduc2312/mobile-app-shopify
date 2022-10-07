@@ -1,21 +1,17 @@
 import React from "react";
-import {
-    View,
-    Text,
-    StyleSheet
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ShoesScreen = (props) => (
-    <View style={styles.container}>
-        <Text>ShoesScreen</Text>
-    </View>
-)
+  <View style={styles.container}>
+
+  </View>
+);
 export default ShoesScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+  container: {
+    flex: 1,
+  },
+
 });

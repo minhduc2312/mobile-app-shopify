@@ -1,6 +1,5 @@
 import { default as instance } from "axios";
 import { SHOPIFY_API_URL, SHOPIFY_ACCESS_TOKEN } from '@env'
-
 let axios = instance.create({
   baseURL: SHOPIFY_API_URL,
   timeout: 60 * 1000,
