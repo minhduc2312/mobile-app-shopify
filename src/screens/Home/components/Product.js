@@ -1,10 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
     View,
     Text,
     StyleSheet,
     Image,
-    Dimensions
+    Dimensions,
+    TouchableOpacity,
+    TouchableHighlight
 } from "react-native";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
@@ -22,16 +25,19 @@ const SkeletonImage = () => (
     </SkeletonPlaceholder>
 )
 
-const Product = ({ title, image }) => {
+const Product = ({ product, onPress }) => {
+    // console.log(product)
+    // const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            {image ? (
-                <Image style={styles.image} source={{ uri: image }} />
+            {product?.image.src ? (
+                <TouchableOpacity style={{ width: '100%', height: '100%' }} onPress={onPress}>
+                    <Image style={styles.image} source={{ uri: product?.image.src }} />
+                </TouchableOpacity>
             ) : (
                 <SkeletonImage />
             )}
-            {/* <SkeletonImage /> */}
-            <Text>{title}</Text>
+            <Text>{product?.title}</Text>
         </View>
     )
 }
@@ -43,7 +49,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 180,
         height: 200,
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
+        marginBottom: 10
     },
     image: {
         width: '100%',

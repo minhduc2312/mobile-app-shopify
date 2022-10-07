@@ -2,7 +2,8 @@ import BannerSection from "../components/BannerSection";
 import axios from "_plugins/axios";
 import Product from "../components/Product";
 import { useCallback, useEffect, useState } from "react";
-import { Dimensions, RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { Dimensions, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 
 const getRandom = (max) => (
@@ -16,11 +17,12 @@ const screen = Dimensions.get('screen')
 
 
 
-const HomePage = (props) => {
+const HomePage = ({ }) => {
     const [products, setProducts] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
     const [banners, setBanners] = useState("");
     const [categories, setCategories] = useState([]);
+    const navigation = useNavigation();
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(500).then(() => {
@@ -55,19 +57,26 @@ const HomePage = (props) => {
                 />
             }
         >
-            <BannerSection source={banners}></BannerSection>
-            <View style={{
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-            }}>
-                {Array.from(Array(10)).map((item, index) => (
-                    <Product key={index} title={categories[index]?.title} image={categories[index]?.image.src} />
-                ))}
-            </View>
+            <SafeAreaView>
+                <BannerSection source={banners}></BannerSection>
+                <View style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                }}>
+                    {Array.from(Array(10)).map((item, index) => (
+                        <Product product={categories[index]} key={index} onPress={() => navigation.navigate('ProductStack', {
+                            screen: 'ProductDetail', params: {
+                                ...categories[index]
+                            }
+                        },)} />
+                    ))}
+                </View>
+            </SafeAreaView>
         </ScrollView>
+
     );
 }
 const styles = StyleSheet.create({

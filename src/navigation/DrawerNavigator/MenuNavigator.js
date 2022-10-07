@@ -1,10 +1,12 @@
 export const MenuNavigator = [
     {
         title: "All Products",
-        navigation: "ProductsDrawer"
+        navigation: "ProductStack",
+        icon: 'home-outline'
     },
     {
         title: "Categories",
+        icon: 'albums-outline',
         submenu: [
             {
                 title: "Shoes",
@@ -19,7 +21,8 @@ export const MenuNavigator = [
     },
     {
         title: "Men",
-        navigation: "MenDrawer",
+        navigation: "MenStack",
+        icon: 'male',
         submenu: [
             {
                 title: "Shoes",
@@ -34,7 +37,8 @@ export const MenuNavigator = [
     },
     {
         title: "Women",
-        navigation: "WomenDrawer",
+        navigation: "WomenStack",
+        icon: 'female',
         submenu: [
             {
                 title: "Shoes",

@@ -10,9 +10,9 @@ import ClothingScreen from "./pages/Clothing";
 import { HeaderBackButton } from '@react-navigation/elements';
 const WomenStack = createStackNavigator();
 
-const WomenStackScreen = ({ navigation, onPress }) => (
+const WomenStackScreen = ({ navigation }) => (
     <WomenStack.Navigator screenOptions={{
-        headerLeft: (canGoBack) => {
+        headerLeft: ({ canGoBack, onPress }) => {
             return canGoBack ? <HeaderBackButton style={styles.button} onPress={onPress}>
             </HeaderBackButton> : <HeaderBackButton style={styles.button} onPress={() => navigation.navigate('HomeDrawer')}>
             </HeaderBackButton>
