@@ -10,7 +10,7 @@ const ProductHome = ({ navigation }) => (
     <View style={styles.container}>
         <TouchableOpacity
             onPress={() => {
-                navigation.navigate('ProductDetail');
+                navigation.navigate('ProductDetail', { id: "123" });
             }}
         ><Text>ProductDetail</Text></TouchableOpacity>
     </View>

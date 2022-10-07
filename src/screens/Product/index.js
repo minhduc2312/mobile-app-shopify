@@ -11,26 +11,38 @@ import { ProductHome, ProductDetail } from "./pages";
 
 import { HeaderBackButton } from '@react-navigation/elements';
 import CategoryStackScreen from "./StackSCreen/CategoryStackScreen";
+import { useNavigation } from "@react-navigation/native";
+import { StackActions } from '@react-navigation/native';
 
 const ProductStack = createStackNavigator();
 
-const ProductStackScreen = ({ navigation }) => (
-  <ProductStack.Navigator screenOptions={{
-    headerLeft: ({ canGoBack, onPress }) => {
-      return canGoBack ? <HeaderBackButton style={styles.button} onPress={onPress}>
-      </HeaderBackButton> : undefined
-    },
-  }}>
-    <ProductStack.Screen name="ProductHome" component={ProductHome} options={{
-      headerLeft: () => (
-        <HeaderBackButton style={styles.button} onPress={() => navigation.jumpTo('HomeDrawer')}>
-        </HeaderBackButton>
-      )
-    }}></ProductStack.Screen>
-    <ProductStack.Screen name="ProductCategory" component={CategoryStackScreen} />
-    <ProductStack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: true }}></ProductStack.Screen>
-  </ProductStack.Navigator>
-)
+const ProductStackScreen = ({ }) => {
+  const navigation = useNavigation();
+  return (
+    <ProductStack.Navigator screenOptions={{
+      headerLeft: ({ canGoBack }) => {
+        console.log(canGoBack)
+        return (
+          <HeaderBackButton style={styles.button} onPress={() => {
+            if (canGoBack) {
+              navigation.goBack()
+            } else {
+              navigation.navigate('HomeDrawer')
+            }
+          }}>
+          </HeaderBackButton>
+        )
+      },
+      headerTitleAlign: "center"
+    }}>
+      <ProductStack.Screen name="ProductHome" component={ProductHome} options={{
+
+      }}></ProductStack.Screen>
+      <ProductStack.Screen name="ProductCategory" component={CategoryStackScreen} />
+      <ProductStack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: true }}></ProductStack.Screen>
+    </ProductStack.Navigator>
+  )
+}
 export default ProductStackScreen;
 
 const styles = StyleSheet.create({
