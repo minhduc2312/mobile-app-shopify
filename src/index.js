@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 const Drawer = createDrawerNavigator();
 const MainStack = createStackNavigator();
 
+//Drawer to show main screen
 const MainDrawer = () => (
     <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}
         initialRouteName="HomeDrawer"

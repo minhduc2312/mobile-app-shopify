@@ -1,28 +1,28 @@
 import BannerSection from "../components/BannerSection";
 import axios from "_plugins/axios";
-import Product from "../components/Product";
+import Product from "../components/ProductItem";
 import { useCallback, useEffect, useState } from "react";
 import { Dimensions, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-
+//get random element in array product to show item test
 const getRandom = (max) => (
     Math.floor(Math.random() * max)
 )
+
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
-let amount = 10
+
 const screen = Dimensions.get('screen')
-
-
-
 const HomePage = ({ }) => {
     const [products, setProducts] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
     const [banners, setBanners] = useState("");
     const [categories, setCategories] = useState([]);
     const navigation = useNavigation();
+
+    //action refresh screen when pull down screen
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         wait(500).then(() => {
@@ -37,7 +37,6 @@ const HomePage = ({ }) => {
                 setProducts(products);
                 setBanners(products[getRandom(products.length)]?.image.src);
                 setCategories(Array.from(Array(10)).map((_, index) => (products[getRandom(products.length)])));
-
             });
         }
         return () => {
@@ -54,8 +53,7 @@ const HomePage = ({ }) => {
                 <RefreshControl
                     refreshing={refreshing}
                     onRefresh={onRefresh}
-                />
-            }
+                />}
         >
             <SafeAreaView>
                 <BannerSection source={banners}></BannerSection>
@@ -69,7 +67,7 @@ const HomePage = ({ }) => {
                     {Array.from(Array(10)).map((item, index) => (
                         <Product product={categories[index]} key={index} onPress={() => navigation.navigate('ProductStack', {
                             screen: 'ProductDetail', params: {
-                                ...categories[index]
+                                product: { ...categories[index] }
                             }
                         },)} />
                     ))}
@@ -82,6 +80,7 @@ const HomePage = ({ }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#fff"
     },
     image: {
         width: screen.width,

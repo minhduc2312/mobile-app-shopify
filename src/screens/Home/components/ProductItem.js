@@ -16,7 +16,6 @@ const SkeletonImage = () => (
         <View style={{
             width: 180,
             height: 200,
-            // paddingHorizontal: 5,
             marginLeft: 10,
             borderRadius: 10,
             shadowRadius: 100
@@ -26,8 +25,7 @@ const SkeletonImage = () => (
 )
 
 const Product = ({ product, onPress }) => {
-    // console.log(product)
-    // const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             {product?.image.src ? (

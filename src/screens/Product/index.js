@@ -21,25 +21,23 @@ const ProductStackScreen = ({ }) => {
   return (
     <ProductStack.Navigator screenOptions={{
       headerLeft: ({ canGoBack }) => {
-        console.log(canGoBack)
         return (
-          <HeaderBackButton style={styles.button} onPress={() => {
-            if (canGoBack) {
-              navigation.goBack()
-            } else {
-              navigation.navigate('HomeDrawer')
-            }
-          }}>
+          <HeaderBackButton style={styles.button} onPress={() =>
+            canGoBack ? navigation.goBack() : navigation.navigate('MainStack')
+          }>
           </HeaderBackButton>
         )
       },
-      headerTitleAlign: "center"
+      headerTitleAlign: "center",
+      headerTitle: () => (
+        <Image source={require('_assets/images/shopLogo.png')} style={{ height: '80%' }} resizeMode="contain" />
+      ),
+
     }}>
       <ProductStack.Screen name="ProductHome" component={ProductHome} options={{
-
-      }}></ProductStack.Screen>
+      }} />
       <ProductStack.Screen name="ProductCategory" component={CategoryStackScreen} />
-      <ProductStack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: true }}></ProductStack.Screen>
+      <ProductStack.Screen name="ProductDetail" component={ProductDetail} />
     </ProductStack.Navigator>
   )
 }

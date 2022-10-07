@@ -1,26 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
-    Text,
     StyleSheet,
-    TouchableOpacity
+    FlatList
 } from "react-native";
+import axios from "_plugins/axios";
+import ProductItem from "../components/ProductItem";
 
-const ProductHome = ({ navigation }) => (
-    <View style={styles.container}>
-        <TouchableOpacity
-            onPress={() => {
-                navigation.navigate('ProductDetail', { id: "123" });
-            }}
-        ><Text>ProductDetail</Text></TouchableOpacity>
-    </View>
-)
+const ProductHome = ({ navigation }) => {
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        axios.get('/admin/api/2022-10/products.json').then(res => {
+            const products = res.data.products
+            setProducts(products);
+        });
+
+        return () => {
+
+        }
+    }, [])
+
+    return (
+        <View style={styles.container}>
+            <FlatList
+                contentContainerStyle={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                }}
+                data={products.splice(5)}
+                renderItem={ProductItem}
+                keyExtractor={item => item.id}
+            />
+        </View>
+    )
+}
 export default ProductHome;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+
     }
 });
