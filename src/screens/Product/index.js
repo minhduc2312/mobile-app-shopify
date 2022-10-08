@@ -1,18 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { ProductHome, ProductDetail } from "./pages";
 
-import { HeaderBackButton } from '@react-navigation/elements';
+import { HeaderBackButton } from "@react-navigation/elements";
 import CategoryStackScreen from "./StackSCreen/CategoryStackScreen";
 import { useNavigation } from "@react-navigation/native";
-import { StackActions } from '@react-navigation/native';
+import { StackActions } from "@react-navigation/native";
 
 const ProductStack = createStackNavigator();
 
@@ -39,14 +33,14 @@ const ProductStackScreen = ({ }) => {
       <ProductStack.Screen name="ProductCategory" component={CategoryStackScreen} />
       <ProductStack.Screen name="ProductDetail" component={ProductDetail} />
     </ProductStack.Navigator>
-  )
-}
+  );
+};
 export default ProductStackScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
