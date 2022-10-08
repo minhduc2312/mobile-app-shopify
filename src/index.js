@@ -1,13 +1,18 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, StatusBar, SafeAreaView, Text } from "react-native";
 
 import DrawerContent from "_navigation/DrawerNavigator/DrawerContent";
 import MainTabScreen from "./navigation/MainTabScreen";
 import Footer from "./screens/Footer";
+import { HeaderBackButton } from "@react-navigation/elements";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { LoginScreen, ProductStackScreen, RegisterScreen } from "./screens";
+import { LoginScreen, ProductScreen, RegisterScreen } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
+import BraceletScreen from "./screens/Home/pages/CategoriesSubMenu/Bracelet";
+import EarringScreen from "_screens/Home/pages/CategoriesSubMenu/Earring";
+import NecklaceScreen from "_screens/Home/pages/CategoriesSubMenu/Necklace";
+import OthersScreen from "_screens/Home/pages/CategoriesSubMenu/Others";
 
 const Drawer = createDrawerNavigator();
 const MainStack = createStackNavigator();
@@ -38,6 +43,7 @@ const MainDrawer = () => (
 );
 
 export default function App() {
+
   return (
     <NavigationContainer style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff"></StatusBar>
@@ -45,10 +51,18 @@ export default function App() {
         <MainStack.Navigator
           style={{ flex: 1 }}
           screenOptions={{
-            headerShown: false,
+            headerTitleAlign: "center",
+            headerTitle: () => (
+              <Image source={require('_assets/images/shopLogo.png')} style={{ height: '80%' }} resizeMode="contain" />
+            ),
           }}
         >
-          <MainStack.Screen name="MainScreen" component={MainDrawer} />
+          <MainStack.Screen name="MainScreen" component={MainDrawer} options={{ headerShown: false }} />
+          <MainStack.Screen name="Product" component={ProductScreen} />
+          <MainStack.Screen name="Bracelet" component={BraceletScreen} />
+          <MainStack.Screen name="Earring" component={EarringScreen} />
+          <MainStack.Screen name="Necklace" component={NecklaceScreen} />
+          <MainStack.Screen name="Others" component={OthersScreen} />
           <MainStack.Screen name="LoginScreen" component={LoginScreen} />
           <MainStack.Screen name="RegisterScreen" component={RegisterScreen} />
         </MainStack.Navigator>

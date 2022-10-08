@@ -1,12 +1,14 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+import BannerSection from "_screens/Home/components/BannerSection";
+import axios from "_plugins/axios";
 
 import HomePage from "./pages/HomePage";
 import BraceletScreen from "./pages/CategoriesSubMenu/Bracelet";
 import EarringScreen from "./pages/CategoriesSubMenu/Earring";
 import NecklaceScreen from "./pages/CategoriesSubMenu/Necklace";
 import OthersScreen from "./pages/CategoriesSubMenu/Others";
-import { ProductScreen } from "_screens";
+import ProductScreen from "../Product";
 
 const Stack = createStackNavigator();
 
@@ -16,7 +18,7 @@ const HomeStackScreen = () => {
         <Stack.Navigator
             screenOptions={{
                 headerTitleAlign: "center",
-                headerShown: false,
+                headerShown: true,
             }}
         >
             <Stack.Screen
