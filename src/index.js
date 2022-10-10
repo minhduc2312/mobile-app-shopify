@@ -43,7 +43,6 @@ const MainDrawer = () => (
 );
 
 export default function App() {
-
   return (
     <NavigationContainer style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff"></StatusBar>
@@ -53,11 +52,19 @@ export default function App() {
           screenOptions={{
             headerTitleAlign: "center",
             headerTitle: () => (
-              <Image source={require('_assets/images/shopLogo.png')} style={{ height: '80%' }} resizeMode="contain" />
+              <Image
+                source={require("_assets/images/shopLogo.png")}
+                style={{ height: "80%" }}
+                resizeMode="contain"
+              />
             ),
           }}
         >
-          <MainStack.Screen name="MainScreen" component={MainDrawer} options={{ headerShown: false }} />
+          <MainStack.Screen
+            name="MainScreen"
+            component={MainDrawer}
+            options={{ headerShown: false }}
+          />
           <MainStack.Screen name="Product" component={ProductScreen} />
           <MainStack.Screen name="Bracelet" component={BraceletScreen} />
           <MainStack.Screen name="Earring" component={EarringScreen} />

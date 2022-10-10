@@ -4,11 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const Login = (props) => (
-  <View style={styles.container}>
-    <Text>Login</Text>
-  </View>
-);
+const Login = (props) => <View style={styles.container}></View>;
 
 const LoginStackNavigator = ({ navigation }) => {
   return (

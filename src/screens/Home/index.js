@@ -14,36 +14,30 @@ const Stack = createStackNavigator();
 
 const screen = Dimensions.get("screen");
 const HomeStackScreen = () => {
-    return (
-        <Stack.Navigator
-            screenOptions={{
-                headerTitleAlign: "center",
-                headerShown: true,
-            }}
-        >
-            <Stack.Screen
-                name="HomePage"
-                component={HomePage}
-                options={{ headerShown: false }}
-            />
-
-            <Stack.Screen name="Product" component={ProductScreen} />
-            <Stack.Screen name="Bracelet" component={BraceletScreen} />
-            <Stack.Screen name="Earring" component={EarringScreen} />
-            <Stack.Screen name="Necklace" component={NecklaceScreen} />
-            <Stack.Screen name="Others" component={OthersScreen} />
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerShown: true,
+      }}
+    >
+      <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
 };
 
 export default HomeStackScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    image: {
-        width: screen.width,
-        height: screen.height,
-    },
+  container: {
+    flex: 1,
+  },
+  image: {
+    width: screen.width,
+    height: screen.height,
+  },
 });

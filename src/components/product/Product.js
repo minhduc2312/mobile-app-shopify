@@ -29,7 +29,7 @@ const SkeletonImage = () => (
 const Product = ({ product }) => {
   const navigation = useNavigation();
   const onPress = () => {
-    navigation.navigate("ProductStack", {
+    navigation.navigate("Product", {
       screen: "ProductDetail",
       params: {
         ...product,
