@@ -14,7 +14,7 @@ export default function ProductSection({ title: title, array: productArray }) {
         <Text style={styles.shopCollectionHeaderText}>{title}</Text>
         <Image
           style={styles.shopCollectionHeaderUnderline}
-          source={require("_assets/images/header-line.png")}
+          source={require("_assets/images/underline_img.png")}
         />
       </View>
       <View style={styles.shopCollectionItem}>
