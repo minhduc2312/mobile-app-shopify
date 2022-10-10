@@ -25,7 +25,6 @@ const ProductHome = ({ navigation }) => {
             <FlatList
                 contentContainerStyle={{
                     flexDirection: 'row',
-
                 }}
                 data={products.splice(5)}
                 renderItem={ProductItem}

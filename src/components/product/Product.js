@@ -5,9 +5,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  Dimensions,
   TouchableOpacity,
-  TouchableHighlight,
 } from "react-native";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
@@ -29,7 +27,7 @@ const SkeletonImage = () => (
 const Product = ({ product }) => {
   const navigation = useNavigation();
   const onPress = () => {
-    navigation.navigate("ProductStack", {
+    navigation.navigate("Product", {
       screen: "ProductDetail",
       params: {
         ...product,

@@ -33,6 +33,7 @@ const ProductDetail = ({ route, navigation }) => {
     const [isNotFound, setIsNotFound] = useState(false);
     const id = useMemo(() => route.params.id, [route.params.id]);
     useEffect(() => {
+
         !productItem && axios.get(`admin/api/2022-10/products/${id}.json`).then(res => {
             setProductItem(() => res.data.product)
         }).catch(() => setIsNotFound(true))
@@ -42,9 +43,9 @@ const ProductDetail = ({ route, navigation }) => {
             <Text>Product not found</Text>
         </View>
     ) : (
-        <ScrollView contentContainerStyle={[styles.container, styles.backgroundColor]} style={styles.backgroundColor}>
+        <View style={{ flex: 1 }}>
             {productItem ? (
-                <View style={{ width: '100%' }}>
+                <ScrollView contentContainerStyle={[styles.container, styles.backgroundColor]}>
                     <View style={styles.imageSection}>
                         <Image source={{ uri: productItem.images[selectedItem].src }} style={styles.image} />
 
@@ -59,6 +60,16 @@ const ProductDetail = ({ route, navigation }) => {
                         <Text style={[styles.detailText, { fontWeight: 'bold', fontSize: 24, backgroundColor: '#fff', marginTop: 10 }]}>{productItem?.title}</Text>
                         <Text style={[styles.detailText, { color: "#555555" }]}>{convertHTMLtoString(productItem?.body_html)}</Text>
                     </View>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 30, width: '100%' }}>
+                        <View>
+                            <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
+                            <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
+                        </View>
+
+                        <TouchableOpacity style={{ padding: 10, paddingHorizontal: 20, backgroundColor: '#333', }}><Text style={{ color: '#fff', fontSize: 18, fontWeight: '600', alignItems: 'center' }}>Add to Cart</Text></TouchableOpacity>
+                    </View>
+
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 30 }}>
                         <View>
                             <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
@@ -67,14 +78,46 @@ const ProductDetail = ({ route, navigation }) => {
 
                         <TouchableOpacity style={{ padding: 10, paddingHorizontal: 20, backgroundColor: '#333', }}><Text style={{ color: '#fff', fontSize: 18, fontWeight: '600', alignItems: 'center' }}>Add to Cart</Text></TouchableOpacity>
                     </View>
-                </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 30 }}>
+                        <View>
+                            <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
+                            <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
+                        </View>
+
+                        <TouchableOpacity style={{ padding: 10, paddingHorizontal: 20, backgroundColor: '#333', }}><Text style={{ color: '#fff', fontSize: 18, fontWeight: '600', alignItems: 'center' }}>Add to Cart</Text></TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 30 }}>
+                        <View>
+                            <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
+                            <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
+                        </View>
+
+                        <TouchableOpacity style={{ padding: 10, paddingHorizontal: 20, backgroundColor: '#333', }}><Text style={{ color: '#fff', fontSize: 18, fontWeight: '600', alignItems: 'center' }}>Add to Cart</Text></TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 30 }}>
+                        <View>
+                            <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
+                            <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
+                        </View>
+
+                        <TouchableOpacity style={{ padding: 10, paddingHorizontal: 20, backgroundColor: '#333', }}><Text style={{ color: '#fff', fontSize: 18, fontWeight: '600', alignItems: 'center' }}>Add to Cart</Text></TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingRight: 30 }}>
+                        <View>
+                            <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
+                            <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
+                        </View>
+
+                        <TouchableOpacity style={{ padding: 10, paddingHorizontal: 20, backgroundColor: '#333', }}><Text style={{ color: '#fff', fontSize: 18, fontWeight: '600', alignItems: 'center' }}>Add to Cart</Text></TouchableOpacity>
+                    </View>
+                </ScrollView>
             ) : (<>
                 <SkeletonProductDetail />
             </>
 
             )}
 
-        </ScrollView>
+        </View>
     )
 }
 
@@ -82,14 +125,16 @@ export default ProductDetail;
 
 const styles = StyleSheet.create({
     backgroundColor: {
-        backgroundColor: '#fff'
+        // backgroundColor: '#fff'
     },
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
         backgroundColor: "#fff",
         paddingHorizontal: 10,
         width: Dimensions.get('screen').width,
+        height: '100%',
+        flexGrow: 1
     },
     imageSection: {
         width: '100%',

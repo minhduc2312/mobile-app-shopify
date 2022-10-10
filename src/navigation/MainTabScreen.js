@@ -21,7 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
-const MainTabScreen = ({ onPress }) => (
+const MainTabScreen = ({ onPress, navigation }) => (
   <Tab.Navigator
     screenOptions={{
       tabBarActiveTintColor: "tomato",
