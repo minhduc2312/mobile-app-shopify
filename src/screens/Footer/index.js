@@ -32,7 +32,7 @@ export default function index() {
         </View>
 
         {/* Underline */}
-        <Image source={require("_assets/images/header-line.png")} />
+        <Image source={require("_assets/images/underline_img.png")} />
 
         {/* Information */}
         <View style={styles.infor}>
@@ -46,7 +46,7 @@ export default function index() {
         </View>
 
         {/* Underline */}
-        <Image source={require("_assets/images/header-line.png")} />
+        <Image source={require("_assets/images/underline_img.png")} />
 
         {/* Navigate link*/}
         <View style={styles.nav}>
