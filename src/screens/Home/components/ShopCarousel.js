@@ -15,46 +15,6 @@ import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 const { width: windowWidth } = Dimensions.get("window");
 
-// const data = [
-//   {
-//     id: "item2",
-//     image: "https://i.imgur.com/N3nQ9CS.jpg",
-//     title: "Peach tea Whiskey Lorem ipsum",
-//     url: "https://github.com/lehoangnam97/react-native-anchor-carousel",
-//   },
-//   {
-//     id: "item3",
-//     image: "https://i.imgur.com/AzdYlDM.jpg",
-//     title: "Camera lens Lorem ipsum dolor sit amet",
-//     url: "https://www.npmjs.com/package/react-native-anchor-carousel",
-//   },
-//   {
-//     id: "item1",
-//     image: "https://i.imgur.com/s7GgEa8.jpg",
-//     title: "Shoes Lorem ipsum dolor sit amet",
-//     url: "https://www.npmjs.com/package/react-native-anchor-carousel",
-//   },
-//   {
-//     id: "item6",
-//     image: "https://i.imgur.com/1O1Kd6T.jpg",
-//     title: "Bottle Opener Lorem ipsum dolor sit amet",
-//     url: "https://github.com/lehoangnam97/react-native-anchor-carousel",
-//   },
-//   {
-//     id: "item4",
-//     image: "https://i.imgur.com/eNuhvpN.jpg",
-//     title: "Modern sunglasses Lorem ipsum dolor sit amet",
-//     url: "https://github.com/lehoangnam97/react-native-anchor-carousel",
-//   },
-
-//   {
-//     id: "item5",
-//     image: "https://i.imgur.com/jEiBmma.jpg",
-//     title: "Cigarettes pipe Lorem ipsum dolor sit amet",
-//     url: "https://www.npmjs.com/package/react-native-anchor-carousel",
-//   },
-// ];
-
 const ITEM_WIDTH = 0.7 * windowWidth;
 const SEPARATOR_WIDTH = 10;
 
@@ -79,7 +39,7 @@ export default function ShopCarousel({ data }) {
           carouselRef.current.scrollToIndex(index);
         }}
       >
-        <Image source={{ uri: image.src }} style={styles.image} />
+        <Image source={{ uri: image?.src }} style={styles.image} />
       </Pressable>
     );
   }

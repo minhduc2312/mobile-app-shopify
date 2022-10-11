@@ -46,6 +46,7 @@ const Register = (props) => {
       cPassword: "",
     },
   });
+  const navigation = useNavigation();
 
   // font family declared
   const [fontsLoader] = useFonts({
@@ -54,7 +55,6 @@ const Register = (props) => {
   if (!fontsLoader) return null;
 
   // navigation for redirect
-  const navigation = useNavigation();
 
   // screen
   const onSubmit = (data) => console.log(data);

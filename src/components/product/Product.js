@@ -36,7 +36,7 @@ const Product = ({ product }) => {
   };
   return (
     <View style={styles.container}>
-      {product?.image.src ? (
+      {product?.image ? (
         <TouchableOpacity
           style={{ width: "100%", height: "100%" }}
           onPress={onPress}

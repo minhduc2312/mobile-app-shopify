@@ -13,8 +13,8 @@ import EarringScreen from "_screens/Home/pages/CategoriesSubMenu/Earring";
 import NecklaceScreen from "_screens/Home/pages/CategoriesSubMenu/Necklace";
 import OthersScreen from "_screens/Home/pages/CategoriesSubMenu/Others";
 import Notification from "_components/Notification";
-import Cart from "_components/Cart";
 import { useStore } from "./store";
+import CartIcon from '_components/CartIcon'
 
 const Drawer = createDrawerNavigator();
 const MainStack = createStackNavigator();
@@ -37,7 +37,7 @@ const MainDrawer = () => (
       headerRight: ({ }) => (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
           <Notification />
-          <Cart />
+          <CartIcon />
         </View>
       )
     }}
@@ -52,7 +52,6 @@ const MainDrawer = () => (
 
 export default function App() {
   const [state, dispatch] = useStore();
-  console.log(state)
   return (
     <NavigationContainer style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff"></StatusBar>
@@ -61,6 +60,7 @@ export default function App() {
           style={{ flex: 1 }}
           screenOptions={{
             headerTitleAlign: "center",
+
             headerTitle: () => (
               <Image
                 source={require("_assets/images/shopLogo.png")}
@@ -72,7 +72,7 @@ export default function App() {
             headerRight: ({ }) => (
               <View style={{ flexDirection: 'row', marginRight: 10 }}>
                 <Notification />
-                <Cart />
+                <CartIcon />
               </View>
             )
           }}

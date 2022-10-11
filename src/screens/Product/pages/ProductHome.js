@@ -3,10 +3,12 @@ import {
     View,
     StyleSheet,
     FlatList,
-    Dimensions
+    Dimensions,
+    Text
 } from "react-native";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import axios from "_plugins/axios";
+import { useStore } from "_store";
 import ProductItem from "../components/ProductItem";
 
 
@@ -25,17 +27,13 @@ const SkeletonProductItem = () => (
 
 
 const ProductHome = ({ navigation }) => {
+    // const [state] = useStore();
     const [products, setProducts] = useState([])
     useEffect(() => {
         axios.get('/admin/api/2022-10/products.json').then(res => {
-            const products = res.data.products
-            setTimeout(() => {
-            }, 1000);
-            setProducts(products);
-
+            setProducts(res.data.products);
         });
         return () => {
-
         }
     }, [])
 
@@ -47,7 +45,7 @@ const ProductHome = ({ navigation }) => {
                     contentContainerStyle={{
                         width: Dimensions.get('screen').width
                     }}
-                    data={products.splice(5)}
+                    data={products}
                     renderItem={({ item }) => (
                         <ProductItem item={item} navigation={navigation} />
                     )}

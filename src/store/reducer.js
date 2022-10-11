@@ -1,7 +1,7 @@
 import { ADD_TO_CART, ADD_NOTIFICATION, FETCH_PRODUCTS, REMOVE_FROM_CART, REMOVE_NOTIFICATION, SET_LOADING, ADD_QUANTITY, SUB_QUANTITY, EMPTY_CART } from "./constant";
 
 const initState = {
-    products: [] ,
+    products: [],
     cart: [],
     notification: [],
     loading: false,
@@ -20,7 +20,6 @@ function reducer(state, action) {
                 products: [...action.payload]
             }
         case ADD_TO_CART:
-            console.log(action.id)
             return {
                 ...state,
                 cart: [...state.cart, {
@@ -34,15 +33,14 @@ function reducer(state, action) {
                 cart: state.cart.filter(item => item.id != action.id)
             }
         case ADD_QUANTITY:
-            console.log('add_quantity')
             return {
                 ...state,
-                cart: state.cart.map(item => item.id == action.id ? item.quantity + 1 : item)
+                cart: state.cart.map(item => item.id == action.id ? { ...item, quantity: item.quantity + 1 } : item)
             }
         case SUB_QUANTITY:
             return {
                 ...state,
-                cart: state.cart.map(item => item.id == action.id ? item.quantity - 1 : item)
+                cart: state.cart.map(item => item.id == action.id ? { ...item, quantity: item.quantity - 1 } : item)
             }
         case EMPTY_CART:
             return {
@@ -59,6 +57,8 @@ function reducer(state, action) {
                 ...state,
                 notification: state.notification.filter(item => item.id != payload.id)
             }
+        default:
+            throw new Error("Invalid action")
 
     }
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -12,14 +12,20 @@ import axios from "_plugins/axios";
 import getMultipleRandom from "../../../components/getMultipleRandom/getMultipleRandom";
 import ProductSection from "../components/ProductSection";
 import Footer from "../../Footer/index";
+import { useStore } from "_store";
+import { fetchProducts } from "_store";
+
+
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
-  const wait = (timeout) => {
-    return new Promise((resolve) => setTimeout(resolve, timeout));
-  };
+  const [state, dispatch] = useStore();
+
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -33,14 +39,15 @@ const HomeScreen = ({ navigation }) => {
       axios.get("/admin/api/2022-10/products.json").then((res) => {
         setProducts(() => res.data.products);
         setData(getMultipleRandom(res.data.products, 5));
+        dispatch(fetchProducts(res.data.products))
       });
     }
   }, [refreshing]);
 
-  const bracelet = [];
-  const necklace = [];
-  const earring = [];
-  const others = [];
+  const bracelet = useMemo(() => [], []);
+  const necklace = useMemo(() => [], []);
+  const earring = useMemo(() => [], []);
+  const others = useMemo(() => [], []);
 
   products.map((item) => {
     if (item.product_type.trim().toLowerCase() == "bracelet") {
@@ -54,6 +61,8 @@ const HomeScreen = ({ navigation }) => {
     }
   });
 
+
+
   return (
     <ScrollView
       style={styles.container}
@@ -65,16 +74,25 @@ const HomeScreen = ({ navigation }) => {
       <ShopCarousel data={data} />
 
       {/* Bracelet */}
-      <ProductSection title={"Bracelet"} array={bracelet}></ProductSection>
+      {bracelet.length ?
+        <ProductSection title={"Bracelet"} array={bracelet}></ProductSection> : null
+      }
 
       {/* Earring */}
-      <ProductSection title={"Earring"} array={earring}></ProductSection>
+      {earring.length ?
+        <ProductSection title={"Earring"} array={earring}></ProductSection> : null
+      }
 
       {/* Necklace */}
-      <ProductSection title={"Necklace"} array={necklace}></ProductSection>
+
+      {necklace.length ?
+        <ProductSection title={"Necklace"} array={necklace}></ProductSection> : null
+      }
 
       {/* Others */}
-      <ProductSection title={"Others"} array={others}></ProductSection>
+      {others.length ?
+        <ProductSection title={"Others"} array={others}></ProductSection> : null
+      }
 
       {/* Footer */}
       <Footer />

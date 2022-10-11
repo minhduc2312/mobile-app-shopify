@@ -10,6 +10,9 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import axios from "_plugins/axios";
+import { handleAddToCart } from "../components/ProductItem";
+import { addToCart } from "_store";
+import { useStore } from "_store";
 const convertHTMLtoString = (string) => {
   return string.replace(/<[^>]+>/g, "");
 };
@@ -39,6 +42,7 @@ const ProductDetail = ({ route, navigation }) => {
   const [productItem, setProductItem] = useState(route.params?.product || undefined)
   const [selectedItem, setSelectedItem] = useState(0)
   const [isNotFound, setIsNotFound] = useState(false);
+  const [state, dispatch] = useStore();
   const id = useMemo(() => route.params.id, [route.params.id]);
   useEffect(() => {
     !productItem && axios.get(`admin/api/2022-10/products/${id}.json`).then(res => {
@@ -75,7 +79,7 @@ const ProductDetail = ({ route, navigation }) => {
               <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
             </View>
 
-            <TouchableOpacity style={styles.buttonCart}>
+            <TouchableOpacity style={styles.buttonCart} onPress={() => handleAddToCart(state, dispatch, productItem.id)}>
               <Text style={styles.buttonCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>

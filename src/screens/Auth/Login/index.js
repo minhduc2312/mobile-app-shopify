@@ -32,6 +32,8 @@ const LoginStackNavigator = ({ navigation }) => {
 };
 
 const Login = (props) => {
+  const navigation = useNavigation();
+
   //  form state, form variable
   const {
     control,
@@ -52,7 +54,6 @@ const Login = (props) => {
   if (!fontsLoader) return null;
 
   // navigation for redirect
-  const navigation = useNavigation();
 
   // screen
   const onSubmit = (data) => console.log(data);

@@ -7,7 +7,6 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function ProductSection({ title: title, array: productArray }) {
   const navigation = useNavigation();
-
   return (
     <View style={styles.shopCollection}>
       <View style={styles.shopCollectionHeader}>
