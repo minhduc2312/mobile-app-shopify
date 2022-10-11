@@ -35,11 +35,6 @@ const MainTabScreen = ({ onPress, navigation }) => (
         shadowOpacity: 0.5,
         elevation: 5,
       },
-      headerLeft: (props) => (
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Image source={require("../assets/images/menu/Menu.png")} />
-        </TouchableOpacity>
-      ),
     }}
   >
     <Tab.Screen

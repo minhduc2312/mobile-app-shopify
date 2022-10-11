@@ -1,7 +1,13 @@
 import "react-native-gesture-handler";
+import { StoreProvider } from "./src/store";
 import App from "./src";
 
 
 export default app = () => {
-  return <App />;
+  return (
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  );
+
 };

@@ -1,40 +1,67 @@
-import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import React, { memo } from "react";
 import {
     View,
     Text,
     StyleSheet,
     Image,
     TouchableHighlight,
-    Dimensions
+    TouchableOpacity,
 } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import { addQuantity } from "_store";
+import { addToCart, useStore } from "_store";
 
-const ProductItem = ({ item }) => {
+const ProductItem = ({ item, navigation }) => {
+    const [state, dispatch] = useStore()
+
+    const handleAddToCart = (id) => {
+        // const inCart = state?.cart?.some(item => item.id === id);
+        // console.log(id)
+        // if (inCart) {
+        //     dispatch(addQuantity(id))
+        //     return;
+        // }
+        dispatch(addToCart(id))
+    }
     return (
-        <View style={styles.container}>
-            <Image source={{ uri: item.image.src }} style={{ width: '100%', height: 200 }} />
-            <View >
-                <View>
-                    <Text>Price</Text>
-                    <Text>Title</Text>
-                </View>
-                <TouchableHighlight>
-                    <Text>Add to Cart</Text>
-                </TouchableHighlight>
-            </View>
+        <View>
+            <TouchableOpacity style={styles.container} onPress={() => navigation.push('ProductDetail', { ...item })}>
+                <>
+                    <Image source={{ uri: item.image.src }} style={{ width: 150, height: 100, borderRadius: 3 }} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, paddingLeft: 10, alignItems: 'center' }}>
+                        <View style={{ width: 120, flex: 1, height: 100, justifyContent: 'space-around' }}>
+                            <Text style={styles.text} >{item.title}</Text>
+                            <Text style={styles.text}>Price: {item.variants[0].price} $</Text>
+                        </View>
 
+                        <TouchableHighlight onPress={() => handleAddToCart(item.id)} style={{ padding: 10, borderColor: '#4267B2', height: 50, width: 50, borderWidth: 1, borderRadius: 50, alignItems: 'center', justifyContent: 'center' }}>
+                            <Icon name="cart-plus" size={24} color="#4267B2" />
+                        </TouchableHighlight>
+                    </View>
+                </>
+            </TouchableOpacity>
         </View>
+
     )
 }
-export default ProductItem;
+export default memo(ProductItem);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 300,
-        width: Dimensions.get('screen').width / 2 - 50,
-        backgroundColor: '#333'
+        width: '100%',
+        flexDirection: 'row',
+        paddingBottom: 5,
+        // backgroundColor: '#333'
+        marginTop: 5,
+        marginLeft: 5,
+        borderBottomWidth: 1,
+        borderColor: '#c4c4c4',
+        paddingRight: 20
+    },
+    text: {
+        fontSize: 18,
 
     }
 });

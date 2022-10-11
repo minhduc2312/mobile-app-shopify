@@ -1,10 +1,9 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { Image, StyleSheet, StatusBar, SafeAreaView, Text } from "react-native";
+import { Image, StyleSheet, StatusBar, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 
 import DrawerContent from "_navigation/DrawerNavigator/DrawerContent";
 import MainTabScreen from "./navigation/MainTabScreen";
-import Footer from "./screens/Footer";
-import { HeaderBackButton } from "@react-navigation/elements";
+
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { LoginScreen, ProductScreen, RegisterScreen } from "./screens";
@@ -13,6 +12,9 @@ import BraceletScreen from "./screens/Home/pages/CategoriesSubMenu/Bracelet";
 import EarringScreen from "_screens/Home/pages/CategoriesSubMenu/Earring";
 import NecklaceScreen from "_screens/Home/pages/CategoriesSubMenu/Necklace";
 import OthersScreen from "_screens/Home/pages/CategoriesSubMenu/Others";
+import Notification from "_components/Notification";
+import Cart from "_components/Cart";
+import { useStore } from "./store";
 
 const Drawer = createDrawerNavigator();
 const MainStack = createStackNavigator();
@@ -32,6 +34,12 @@ const MainDrawer = () => (
         />
       ),
       headerTitleAlign: "center",
+      headerRight: ({ }) => (
+        <View style={{ flexDirection: 'row', marginRight: 10 }}>
+          <Notification />
+          <Cart />
+        </View>
+      )
     }}
   >
     <Drawer.Screen
@@ -43,7 +51,8 @@ const MainDrawer = () => (
 );
 
 export default function App() {
-
+  const [state, dispatch] = useStore();
+  console.log(state)
   return (
     <NavigationContainer style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff"></StatusBar>
@@ -53,12 +62,28 @@ export default function App() {
           screenOptions={{
             headerTitleAlign: "center",
             headerTitle: () => (
-              <Image source={require('_assets/images/shopLogo.png')} style={{ height: '80%' }} resizeMode="contain" />
+              <Image
+                source={require("_assets/images/shopLogo.png")}
+                style={{ height: "80%" }}
+                resizeMode="contain"
+              />
             ),
+            headerTransparent: true,
+            headerRight: ({ }) => (
+              <View style={{ flexDirection: 'row', marginRight: 10 }}>
+                <Notification />
+                <Cart />
+              </View>
+            )
           }}
         >
-          <MainStack.Screen name="MainScreen" component={MainDrawer} options={{ headerShown: false }} />
-          <MainStack.Screen name="Product" component={ProductScreen} />
+          <MainStack.Screen
+            name="MainScreen"
+
+            component={MainDrawer}
+            options={{ headerShown: false, title: "Home" }}
+          />
+          <MainStack.Screen name="Product" component={ProductScreen} options={{ headerShown: false, }} />
           <MainStack.Screen name="Bracelet" component={BraceletScreen} />
           <MainStack.Screen name="Earring" component={EarringScreen} />
           <MainStack.Screen name="Necklace" component={NecklaceScreen} />
