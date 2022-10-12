@@ -8,7 +8,10 @@ import {
   Button,
   Alert,
   Pressable,
+  TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  ScrollView,
+  Keyboard,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useForm, Controller } from "react-hook-form";
@@ -23,15 +26,16 @@ const LoginStackNavigator = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <Stack.Screen name="LoginPage" component={Login} />
+      <Stack.Screen name=" " component={Login} />
     </Stack.Navigator>
   );
 };
 
 const Login = (props) => {
+  // navigation for redirect
   const navigation = useNavigation();
 
   //  form state, form variable
@@ -42,7 +46,7 @@ const Login = (props) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      userName: "",
+      email: "",
       password: "",
     },
   });
@@ -53,8 +57,6 @@ const Login = (props) => {
   });
   if (!fontsLoader) return null;
 
-  // navigation for redirect
-
   // screen
   const onSubmit = (data) => console.log(data);
   return (
@@ -62,101 +64,111 @@ const Login = (props) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <View>
-        {/* Header  */}
-        <View style={styles.loginHeader}>
-          <CustomText style={styles.loginHeaderText}>Login</CustomText>
-        </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView>
+          <View style={styles.inner}>
+            {/* Header  */}
+            <View style={styles.loginHeader}>
+              <CustomText style={styles.loginHeaderText}>Login</CustomText>
+            </View>
 
-        {/* Underline */}
-        <View style={styles.loginUnderLine}>
-          <Image source={require("_assets/images/underline_img.png")} />
-        </View>
+            {/* Underline */}
+            <View style={styles.loginUnderLine}>
+              <Image source={require("_assets/images/underline_img.png")} />
+            </View>
 
-        {/* Form */}
-        <View style={styles.formContainer}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="User name"
+            {/* Form */}
+            <View style={styles.formContainer}>
+              {/* Email */}
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "invalid email address",
+                  },
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={styles.input}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="Email"
+                  />
+                )}
+                name="email"
               />
-            )}
-            name="userName"
-          />
+              {/* Email Error */}
+              {errors.email && (
+                <CustomText style={styles.inputError}>
+                  {errors.email.message || "Email is required."}
+                </CustomText>
+              )}
 
-          {errors.userName && (
-            <CustomText style={styles.inputError}>
-              User name is required.
-            </CustomText>
-          )}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={[styles.input, { marginTop: 15 }]}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Password"
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={[styles.input, { marginTop: 15 }]}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                  />
+                )}
+                name="password"
               />
-            )}
-            name="password"
-          />
-          {errors.password && (
-            <CustomText style={styles.inputError}>
-              Password is required.
-            </CustomText>
-          )}
+              {errors.password && (
+                <CustomText style={styles.inputError}>
+                  Password is required.
+                </CustomText>
+              )}
 
-          {/* Redirect to Register */}
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 45,
-            }}
-          >
-            <CustomText>Don't have an account yet? </CustomText>
-            <Pressable
-              onPress={() => {
-                navigation.navigate("RegisterScreen");
+              {/* Redirect to Register */}
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: 45,
+                }}
+              >
+                <CustomText>Don't have an account yet? </CustomText>
+                <Pressable
+                  onPress={() => {
+                    navigation.navigate("RegisterScreen");
+                  }}
+                >
+                  <CustomText style={{ color: "#0B0080" }}>Sign Up</CustomText>
+                </Pressable>
+              </View>
+            </View>
+
+            {/* Submit Button */}
+            <View
+              style={{
+                marginTop: 50,
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <CustomText style={{ color: "#0B0080" }}>Sign Up</CustomText>
-            </Pressable>
+              <BlackCustomButton
+                style={styles.submitButton}
+                color="#000000"
+                title="Login"
+                onPress={handleSubmit(onSubmit)}
+              />
+            </View>
           </View>
-        </View>
-
-        {/* Submit Button */}
-        <View
-          style={{
-            marginTop: 50,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <BlackCustomButton
-            style={styles.submitButton}
-            color="#000000"
-            title="Login"
-            onPress={handleSubmit(onSubmit)}
-          />
-        </View>
-      </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 };
@@ -187,7 +199,7 @@ const styles = StyleSheet.create({
   },
   // Form
   formContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
   },
   input: {
     height: 50,

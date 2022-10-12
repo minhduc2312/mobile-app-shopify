@@ -15,7 +15,6 @@ import Footer from "../../Footer/index";
 import { useStore } from "_store";
 import { fetchProducts } from "_store";
 
-
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
@@ -25,7 +24,6 @@ const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [state, dispatch] = useStore();
-
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -39,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
       axios.get("/admin/api/2022-10/products.json").then((res) => {
         setProducts(() => res.data.products);
         setData(getMultipleRandom(res.data.products, 5));
-        dispatch(fetchProducts(res.data.products))
+        dispatch(fetchProducts(res.data.products));
       });
     }
   }, [refreshing]);
@@ -61,8 +59,6 @@ const HomeScreen = ({ navigation }) => {
     }
   });
 
-
-
   return (
     <ScrollView
       style={styles.container}
@@ -74,25 +70,25 @@ const HomeScreen = ({ navigation }) => {
       <ShopCarousel data={data} />
 
       {/* Bracelet */}
-      {bracelet.length ?
-        <ProductSection title={"Bracelet"} array={bracelet}></ProductSection> : null
-      }
+      {bracelet.length ? (
+        <ProductSection title={"Bracelet"} array={bracelet}></ProductSection>
+      ) : null}
 
       {/* Earring */}
-      {earring.length ?
-        <ProductSection title={"Earring"} array={earring}></ProductSection> : null
-      }
+      {earring.length ? (
+        <ProductSection title={"Earring"} array={earring}></ProductSection>
+      ) : null}
 
       {/* Necklace */}
 
-      {necklace.length ?
-        <ProductSection title={"Necklace"} array={necklace}></ProductSection> : null
-      }
+      {necklace.length ? (
+        <ProductSection title={"Necklace"} array={necklace}></ProductSection>
+      ) : null}
 
       {/* Others */}
-      {others.length ?
-        <ProductSection title={"Others"} array={others}></ProductSection> : null
-      }
+      {others.length ? (
+        <ProductSection title={"Others"} array={others}></ProductSection>
+      ) : null}
 
       {/* Footer */}
       <Footer />
