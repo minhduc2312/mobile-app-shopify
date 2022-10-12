@@ -18,7 +18,8 @@ module.exports = {
           _styles: './src/styles',
           _utils: './src/utils',
           _plugins: './src/plugins',
-          _store: './src/store'
+          _store: './src/store',
+          _config:'./src/config'
         },
       },
     },
