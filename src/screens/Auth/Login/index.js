@@ -20,43 +20,24 @@ import BlackCustomButton from "_components/blackCustomButton/BlackCustomButton.j
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app, db } from "_config/firebase";
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
-import firebase from "firebase/app";
 
 const Stack = createStackNavigator();
 const auth = getAuth();
 
 const LoginStackNavigator = ({ navigation }) => {
-  const tokens = [];
-  const getData = async () => {
-    const colRef = collection(db, "expo-tokens");
-    const docsSnap = await getDocs(colRef);
-    docsSnap.forEach((doc) => {
-      const { token } = doc.data();
-      tokens.push(token);
-    });
-    console.log(tokens);
-  };
-  getData();
-
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
     >
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name=" " component={Login} />
     </Stack.Navigator>
   );
 };
 
 async function signIn(email, password) {
-  try {
-    return signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    console.log(error);
-  }
+  await signIn(auth, email, password);
 }
 
 const Login = (props) => {
@@ -83,11 +64,7 @@ const Login = (props) => {
   if (!fontsLoader) return null;
 
   // screen
-  const onSubmit = (data) => {
-    signIn(data.email, data.password)
-      .then(navigation.navigate("HomeScreen"))
-      .catch((error) => console.log(error));
-  };
+  const onSubmit = (data) => signIn(data.email, data.password);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
