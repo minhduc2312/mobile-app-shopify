@@ -14,6 +14,7 @@ import ProductSection from "../components/ProductSection";
 import Footer from "../../Footer/index";
 import { useStore } from "_store";
 import { fetchProducts } from "_store";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));

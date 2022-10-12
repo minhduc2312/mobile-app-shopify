@@ -2,16 +2,11 @@ import React from "react";
 import {
   View,
   StyleSheet,
-  TouchableOpacity,
   Image,
   TextInput,
-  Button,
-  Alert,
   Pressable,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
   ScrollView,
-  Keyboard,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useForm, Controller } from "react-hook-form";
@@ -28,16 +23,29 @@ const RegisterStackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}
     >
-      <Stack.Screen name=" " component={Register} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 };
 
 async function createUser(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password);
+  try {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((err) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("errorCode : ", errorCode);
+        console.log("errorMessage : ", errorMessage);
+      });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const Register = (props) => {
@@ -51,7 +59,6 @@ const Register = (props) => {
     mode: "onChange",
     defaultValues: {
       email: "",
-      userName: "",
       password: "",
       cPassword: "",
     },
@@ -68,12 +75,12 @@ const Register = (props) => {
   });
   if (!fontsLoader) return null;
 
-  async function createAccount() {}
+  // Submit function
+  const onSubmit = (data) => {
+    createUser(data.email, data.password);
+  };
 
   // screen
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -121,11 +128,19 @@ const Register = (props) => {
                 {errors.email.message || "Email is required."}
               </CustomText>
             )}
+
             {/* Password */}
             <Controller
               control={control}
               rules={{
-                required: true,
+                required: {
+                  value: true,
+                  message: "Password is required",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Password is 8 characters long",
+                },
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
@@ -142,14 +157,22 @@ const Register = (props) => {
             {/* Password Error */}
             {errors.password && (
               <CustomText style={styles.inputError}>
-                Password is required.
+                {errors.password.message}
               </CustomText>
             )}
+
             {/* Confirm Password */}
             <Controller
               control={control}
               rules={{
-                required: true,
+                required: {
+                  value: true,
+                  message: "Confirm password is required",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Confirm password is 8 characters long",
+                },
                 validate: (value) =>
                   value === pwd ||
                   "Confirm password do not match, please try again.",
@@ -167,11 +190,12 @@ const Register = (props) => {
               name="cPassword"
             />
             {/* Confirm Password Error */}
-            {errors.cpassword && (
+            {errors.cPassword && (
               <CustomText style={styles.inputError}>
-                {errors.cpassword.message || "Confirm password is required."}
+                {errors.cPassword.message || "Confirm password is required."}
               </CustomText>
             )}
+
             {/* Redirect to Login */}
             <View
               style={{
