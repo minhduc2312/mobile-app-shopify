@@ -98,6 +98,7 @@ export default function App() {
         >
           <MainStack.Screen
             name="MainScreen"
+
             component={MainDrawer}
             options={{ headerShown: false, title: "Home" }}
           />
