@@ -1,10 +1,11 @@
-import { ADD_TO_CART, ADD_NOTIFICATION, FETCH_PRODUCTS, REMOVE_FROM_CART, REMOVE_NOTIFICATION, SET_LOADING, ADD_QUANTITY, SUB_QUANTITY, EMPTY_CART } from "./constant";
+import { ADD_TO_CART, ADD_NOTIFICATION, FETCH_PRODUCTS, REMOVE_FROM_CART, REMOVE_NOTIFICATION, SET_LOADING, ADD_QUANTITY, SUB_QUANTITY, EMPTY_CART, SET_EXPO_TOKEN } from "./constant";
 
 const initState = {
     products: [],
     cart: [],
     notification: [],
     loading: false,
+    expoToken: '',
 }
 
 function reducer(state, action) {
@@ -56,6 +57,11 @@ function reducer(state, action) {
             return {
                 ...state,
                 notification: state.notification.filter(item => item.id != payload.id)
+            }
+        case SET_EXPO_TOKEN:
+            return {
+                ...state,
+                expoToken: action.expoToken
             }
         default:
             throw new Error("Invalid action")

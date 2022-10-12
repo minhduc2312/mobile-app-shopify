@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, SET_LOADING, REMOVE_FROM_CART, ADD_TO_CART, ADD_NOTIFICATION, REMOVE_NOTIFICATION, EMPTY_CART, ADD_QUANTITY, SUB_QUANTITY } from "./constant";
+import { FETCH_PRODUCTS, SET_LOADING, REMOVE_FROM_CART, ADD_TO_CART, ADD_NOTIFICATION, REMOVE_NOTIFICATION, EMPTY_CART, ADD_QUANTITY, SUB_QUANTITY, SET_EXPO_TOKEN } from "./constant";
 
 export const fetchProducts = (payload) => ({
     type: FETCH_PRODUCTS,
@@ -37,4 +37,8 @@ export const addNotification = (payload) => ({
 export const removeNotification = (payload) => ({
     type: REMOVE_NOTIFICATION,
     payload
+})
+export const setExpoPushToken = (token) => ({
+    type: SET_EXPO_TOKEN,
+    expoToken: token
 })

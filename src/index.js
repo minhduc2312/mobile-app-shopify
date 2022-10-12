@@ -1,5 +1,6 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, StatusBar, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import * as Linking from 'expo-linking';
 
 import DrawerContent from "_navigation/DrawerNavigator/DrawerContent";
 import MainTabScreen from "./navigation/MainTabScreen";
@@ -15,6 +16,8 @@ import OthersScreen from "_screens/Home/pages/CategoriesSubMenu/Others";
 import Notification from "_components/Notification";
 import { useStore } from "./store";
 import CartIcon from '_components/CartIcon'
+import { useEffect } from "react";
+import RegisterNotification from "_screens/Notification/RegisterNotification";
 
 const Drawer = createDrawerNavigator();
 const MainStack = createStackNavigator();
@@ -52,9 +55,25 @@ const MainDrawer = () => (
 
 export default function App() {
   const [state, dispatch] = useStore();
+  const linking = {
+    prefixes: [Linking.createURL('/')],
+    config: {
+      screens: {
+        Product: {
+          screens: {
+            ProductHome: "product",
+            ProductDetail: "product/:id"
+          }
+        },
+      }
+    }
+  }
   return (
-    <NavigationContainer style={styles.container}>
+    <NavigationContainer style={styles.container}
+      linking={linking}
+    >
       <StatusBar barStyle="dark-content" backgroundColor="#fff"></StatusBar>
+      <RegisterNotification />
       <SafeAreaView style={{ flex: 1 }}>
         <MainStack.Navigator
           style={{ flex: 1 }}
