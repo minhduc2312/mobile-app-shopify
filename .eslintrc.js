@@ -17,7 +17,8 @@ module.exports = {
           _services: './src/services',
           _styles: './src/styles',
           _utils: './src/utils',
-          _plugins: './src/plugins'
+          _plugins: './src/plugins',
+          _store: './src/store'
         },
       },
     },

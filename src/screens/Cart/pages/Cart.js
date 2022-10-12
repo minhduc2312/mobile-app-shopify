@@ -2,20 +2,20 @@ import React from "react";
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from "react-native";
 
-const ShoesScreen = (props) => (
+const CartScreen = (props) => (
     <View style={styles.container}>
-        <Text>ShoesScreen</Text>
+        <Text>CartScreen</Text>
     </View>
 )
-export default ShoesScreen;
+export default CartScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+
     }
 });

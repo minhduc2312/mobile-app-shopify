@@ -6,7 +6,6 @@ import {
     Dimensions,
 } from "react-native";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
-
 const SkeletonBanner = () => (
     <SkeletonPlaceholder>
         <View style={styles.image}>
@@ -14,14 +13,16 @@ const SkeletonBanner = () => (
     </SkeletonPlaceholder>
 )
 
-const BannerSection = ({ source }) => (
-    <View style={styles.banner}>
-        {source ? (
-            <Image style={styles.image} source={{ uri: source }} />
-        ) : <SkeletonBanner />}
+const BannerSection = ({ source }) => {
+    return (
+        <View style={styles.banner}>
+            {source ? (
+                <Image style={styles.image} source={{ uri: source }} />
+            ) : <SkeletonBanner />}
 
-    </View>
-)
+        </View>
+    )
+}
 
 
 export default BannerSection;

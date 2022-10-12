@@ -20,9 +20,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
-// const isShowHeader = Platform.OS === "android";
 
-const BottomTabNavigation = ({ onPress }) => (
+const MainTabScreen = ({ onPress, navigation }) => (
   <Tab.Navigator
     screenOptions={{
       tabBarActiveTintColor: "tomato",
@@ -36,11 +35,6 @@ const BottomTabNavigation = ({ onPress }) => (
         shadowOpacity: 0.5,
         elevation: 5,
       },
-      headerLeft: (props) => (
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Image source={require("../assets/images/menu/Menu.png")} />
-        </TouchableOpacity>
-      ),
     }}
   >
     <Tab.Screen
@@ -82,7 +76,7 @@ const BottomTabNavigation = ({ onPress }) => (
     />
   </Tab.Navigator>
 );
-export default BottomTabNavigation;
+export default MainTabScreen;
 
 const styles = StyleSheet.create({
   container: {
