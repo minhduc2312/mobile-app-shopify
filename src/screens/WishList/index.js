@@ -1,9 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const WishList = (props) => (
+const WishList = ({ navigation }) => (
   <View style={styles.container}>
-    <Text>WishList</Text>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("HomeScreen");
+      }}
+    >
+      <Text>Hello WishList</Text>
+    </TouchableOpacity>
   </View>
 );
 export default WishList;

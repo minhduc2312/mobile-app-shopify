@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -9,22 +9,24 @@ import {
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
+import IconBell from "react-native-vector-icons/Fontisto";
 import {
-  HomeScreen,
+  HomeStackScreen,
   WishListScreen,
   NotificationScreen,
   MoreScreen,
 } from "../screens";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
-const isShowHeader = Platform.OS === "android";
+// const isShowHeader = Platform.OS === "android";
 
 const BottomTabNavigation = ({ onPress }) => (
   <Tab.Navigator
     screenOptions={{
-      tabBarActiveTintColor: "#551E18",
-      headerShown: isShowHeader,
+      tabBarActiveTintColor: "tomato",
+      headerShown: false,
       tabBarInActiveTintColor: "grey",
       headerTitleAlign: "center",
       tabBarStyle: {
@@ -42,11 +44,11 @@ const BottomTabNavigation = ({ onPress }) => (
     }}
   >
     <Tab.Screen
-      name="Home"
-      component={HomeScreen}
+      name="HomeScreen"
+      component={HomeStackScreen}
       options={{
         tabBarLabel: "Home",
-        tabBarIcon: ({ color }) => <Icon name="home" color={color} size={24} />,
+        tabBarIcon: ({ color, focused }) => <Icon name={focused ? "home" : 'home-outline'} color={color} size={26} />,
       }}
     />
     <Tab.Screen
@@ -54,8 +56,8 @@ const BottomTabNavigation = ({ onPress }) => (
       component={WishListScreen}
       options={{
         tabBarLabel: "WishList",
-        tabBarIcon: ({ color }) => (
-          <Icon name="heart" color={color} size={24} />
+        tabBarIcon: ({ color, focused }) => (
+          <Icon name={focused ? "heart" : 'heart-outline'} color={color} size={26} />
         ),
       }}
     />
@@ -64,7 +66,8 @@ const BottomTabNavigation = ({ onPress }) => (
       component={NotificationScreen}
       options={{
         tabBarLabel: "Notification",
-        tabBarIcon: ({ color }) => <Icon name="bell" color={color} size={24} />,
+        tabBarBadge: 3,
+        tabBarIcon: ({ color, focused }) => <IconBell name={focused ? 'bell-alt' : 'bell'} color={color} size={26} />,
       }}
     />
     <Tab.Screen
@@ -72,8 +75,8 @@ const BottomTabNavigation = ({ onPress }) => (
       component={MoreScreen}
       options={{
         tabBarLabel: "More",
-        tabBarIcon: ({ color }) => (
-          <Icon name="ellipsis-h" color={color} size={24} />
+        tabBarIcon: ({ color, focused }) => (
+          <Icon name={focused ? "ellipsis-horizontal" : "ellipsis-horizontal-outline"} color={color} size={32} />
         ),
       }}
     />

@@ -1,5 +1,12 @@
 {
+  "presets": ["babel-preset-expo"],
   "plugins": [
+    [
+      "module:react-native-dotenv",
+      {
+        "moduleName": "@env"
+      }
+    ],
     [
       "module-resolver",
       {
@@ -16,7 +23,8 @@
           "_screens": "./src/screens",
           "_services": "./src/services",
           "_styles": "./src/styles",
-          "_utils": "./src/utils"
+          "_utils": "./src/utils",
+          "_plugins": "./src/plugins"
         }
       }
     ]

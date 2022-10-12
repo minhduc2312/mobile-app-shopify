@@ -5,13 +5,12 @@ import {
     StyleSheet
 } from "react-native";
 
-
-const HomeDetailsScreen = (props) => (
+const ProductCategory = ({ navigation, route }) => (
     <View style={styles.container}>
-        <Text>HomeDetailScreen</Text>
+        <Text>{route.params.title || navigation.name}</Text>
     </View>
 )
-export default HomeDetailsScreen;
+export default ProductCategory;
 
 const styles = StyleSheet.create({
     container: {
