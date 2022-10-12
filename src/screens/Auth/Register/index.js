@@ -19,9 +19,10 @@ import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import CustomText from "_components/customText/CustomText.js";
 import BlackCustomButton from "_components/blackCustomButton/BlackCustomButton.js";
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Stack = createStackNavigator();
+const auth = getAuth();
 
 const RegisterStackNavigator = () => {
   return (
@@ -34,6 +35,10 @@ const RegisterStackNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+async function createUser(email, password) {
+  await createUserWithEmailAndPassword(auth, email, password);
+}
 
 const Register = (props) => {
   //  form state, form variable
@@ -54,6 +59,7 @@ const Register = (props) => {
 
   const pwd = watch("password");
 
+  // navigation for redirect
   const navigation = useNavigation();
 
   // font family declared
@@ -62,12 +68,12 @@ const Register = (props) => {
   });
   if (!fontsLoader) return null;
 
-  // navigation for redirect
-
   async function createAccount() {}
 
   // screen
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}

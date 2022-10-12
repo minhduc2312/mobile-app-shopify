@@ -19,8 +19,10 @@ import CustomText from "_components/customText/CustomText.js";
 import BlackCustomButton from "_components/blackCustomButton/BlackCustomButton.js";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Stack = createStackNavigator();
+const auth = getAuth();
 
 const LoginStackNavigator = ({ navigation }) => {
   return (
@@ -33,6 +35,10 @@ const LoginStackNavigator = ({ navigation }) => {
     </Stack.Navigator>
   );
 };
+
+async function signIn(email, password) {
+  await signIn(auth, email, password);
+}
 
 const Login = (props) => {
   // navigation for redirect
@@ -58,7 +64,7 @@ const Login = (props) => {
   if (!fontsLoader) return null;
 
   // screen
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => signIn(data.email, data.password);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
