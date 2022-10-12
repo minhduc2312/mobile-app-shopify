@@ -54,7 +54,7 @@ const ProductDetail = ({ route, navigation }) => {
       <Text>Product not found</Text>
     </View>
   ) : (
-    <View style={{}}>
+    <View style={{ flex: 1 }}>
       {productItem ? (
         <ScrollView contentContainerStyle={[styles.container, styles.backgroundColor]} style={[styles.backgroundColor, { width: '100%' }]}>
           <View style={styles.imageSection}>
