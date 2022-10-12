@@ -11,7 +11,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "icon": "./src/assets/images/firegroup.jpg",
 
     "notification": {
       "icon": "./src/assets/images/firegroup.jpg"
@@ -30,7 +29,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.MobileAppShopify.MobileAppShopify",
+      "bundleIdentifier": "com.mobileshopify.app",
       "supportsTablet": true,
       "infoPlist": {
         "LSApplicationQueriesSchemes": ["lyft"]
@@ -44,6 +43,8 @@
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
-    }
+    },
+    "platforms": ["ios", "android"],
+    "icon": "./src/assets/images/firegroup.jpg"
   }
 }

@@ -24,14 +24,11 @@ const RegisterNotification = (props) => {
         registerForPushNotificationsAsync().then(token => dispatch(setExpoPushToken(token)));
         notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
             setNotification(notification);
-            console.log(notification.request.content.data)
         });
         responseListener.current =
             Notifications.addNotificationResponseReceivedListener(async (response) => {
-                console.log(await LinkingExpo.openURL('exp://192.168.101.120:19000/--/product'))
-                console.log(await Linking.getInitialURL)
+
             });
-        console.log('last', lastNotificationResponse)
 
         return () => {
             Notifications.removeNotificationSubscription(notificationListener.current);
@@ -69,7 +66,6 @@ async function registerForPushNotificationsAsync() {
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
     } else {
         alert('Must use physical device for Push Notifications');
     }

@@ -1,17 +1,36 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
+import ProductItem from "_screens/Product/components/ProductItem";
+import { useStore } from "_store";
 
-const OthersScreen = (props) => (
-  <View style={styles.container}>
-    <Text>OthersScreen</Text>
-  </View>
-);
+const OthersScreen = ({ }) => {
+  const [state] = useStore();
+  const { products } = state
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <FlatList
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={{
+          width: Dimensions.get('screen').width
+        }}
+        data={products.filter(product => product.product_type == '')}
+        renderItem={({ item }) => (
+          item?.image?.src ? <ProductItem item={item} navigation={navigation} /> : null
+        )}
+        keyExtractor={item => item.id}
+        initialNumToRender={6}
+      />
+    </View>
+  );
+}
 export default OthersScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-
 });

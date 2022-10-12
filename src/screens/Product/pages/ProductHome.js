@@ -47,7 +47,7 @@ const ProductHome = ({ navigation }) => {
                     }}
                     data={products}
                     renderItem={({ item }) => (
-                        <ProductItem item={item} navigation={navigation} />
+                        item?.image?.src ? <ProductItem item={item} navigation={navigation} /> : null
                     )}
                     keyExtractor={item => item.id}
                     initialNumToRender={6}

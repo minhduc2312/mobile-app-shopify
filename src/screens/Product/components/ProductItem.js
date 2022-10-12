@@ -17,11 +17,9 @@ export const handleAddToCart = (state, dispatch, id) => {
     const inCart = state?.cart?.some(item => item.id === id);
     if (inCart) {
         dispatch(addQuantity(id))
-        console.log(state.cart)
         return;
     }
     dispatch(addToCart(id))
-    // // console.log(addtoCart)\
 }
 const ProductItem = ({ item, navigation }) => {
     const [state, dispatch] = useStore()
@@ -29,7 +27,14 @@ const ProductItem = ({ item, navigation }) => {
 
     return (
         <View>
-            <TouchableOpacity style={styles.container} onPress={() => navigation.push('ProductDetail', { ...item })}>
+            <TouchableOpacity style={styles.container}
+                onPress={() => navigation.navigate('Product',
+                    {
+                        screen: 'ProductDetail',
+                        params: { ...item }
+                    },
+                )}
+            >
                 <>
                     <Image source={{ uri: item?.image?.src }} style={{ width: 150, height: 100, borderRadius: 3 }} />
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, paddingLeft: 10, alignItems: 'center' }}>
@@ -44,7 +49,7 @@ const ProductItem = ({ item, navigation }) => {
                     </View>
                 </>
             </TouchableOpacity>
-        </View>
+        </View >
 
     )
 }

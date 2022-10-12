@@ -23,7 +23,6 @@ const CartItem = ({ items, quantity }) => {
         } else {
             dispatch(removeFromCart(id))
         }
-        console.log(state.cart)
     }
     return (
         <View style={styles.container}>

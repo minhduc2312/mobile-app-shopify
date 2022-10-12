@@ -87,7 +87,7 @@ export default function App() {
                 resizeMode="contain"
               />
             ),
-            headerTransparent: true,
+            headerLeftLabelVisible: false,
             headerRight: ({ }) => (
               <View style={{ flexDirection: 'row', marginRight: 10 }}>
                 <Notification />
@@ -98,7 +98,6 @@ export default function App() {
         >
           <MainStack.Screen
             name="MainScreen"
-
             component={MainDrawer}
             options={{ headerShown: false, title: "Home" }}
           />

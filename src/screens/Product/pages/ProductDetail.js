@@ -59,23 +59,21 @@ const ProductDetail = ({ route, navigation }) => {
         <ScrollView contentContainerStyle={[styles.container, styles.backgroundColor]} style={[styles.backgroundColor, { width: '100%' }]}>
           <View style={styles.imageSection}>
             <Image source={{ uri: productItem.images[selectedItem].src }} style={styles.image} />
-
           </View>
-          <ScrollView style={[styles.subImageSection]} horizontal={true} showsHorizontalScrollIndicator={false}
+          <ScrollView contentContainerStyle={styles.subImageSection} horizontal={true} showsHorizontalScrollIndicator={false}
           >
             {productItem.images.map((image, index) => (
               <Image key={index} source={{ uri: image.src }} style={[styles.subImage]} />
             ))}
           </ScrollView>
           <View style={styles.detailText}>
-            <Text style={[styles.detailText, { fontWeight: 'bold', fontSize: 24, backgroundColor: '#fff', marginTop: 10 }]}>{productItem?.title}</Text>
+            <Text style={[styles.detailText, { fontWeight: 'bold', fontSize: 24 }]}>{productItem?.title}</Text>
             <Text style={[styles.detailText, { color: "#555555" }]}>{convertHTMLtoString(productItem?.body_html)}</Text>
           </View>
 
-
           <View style={styles.infoItem}>
             <View style={{ height: 100, justifyContent: 'space-around' }}>
-              <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
+              <Text style={[styles.detailText, { color: "#DD8560" }]}>Price: $ {productItem?.variants[selectedItem].price}</Text>
               <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
             </View>
 
@@ -101,9 +99,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   container: {
-    // flex: 1,
     flexGrow: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: "#fff",
     paddingHorizontal: 10,
     width: Dimensions.get('screen').width,
@@ -123,12 +121,11 @@ const styles = StyleSheet.create({
     height: 100,
     flexDirection: 'row',
     marginTop: 5,
-    width: '100%'
-
+    width: '100%',
   },
   subImage: {
     width: 100,
-    height: '100%',
+    height: 100,
     marginRight: 5
   },
   description: {
@@ -136,7 +133,6 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 18,
-    backgroundColor: 'transparent',
     width: '100%',
     marginBottom: 5
   },
