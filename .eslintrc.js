@@ -19,7 +19,9 @@ module.exports = {
           _utils: './src/utils',
           _plugins: './src/plugins',
           _store: './src/store',
-          _config:'./src/config'
+          _config: './src/config',
+          _hooks: "./src/hooks"
+
         },
       },
     },

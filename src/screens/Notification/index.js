@@ -1,7 +1,10 @@
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
-import React, { useState, useEffect, useRef } from "react";
-import { Text, View, Button, Platform, TextInput } from "react-native";
+import * as Notifications from 'expo-notifications';
+
+import React, { useState } from 'react';
+import { Text, View, Button, Platform, TextInput, Linking, KeyboardAvoidingView, Keyboard, TouchableOpacity, ScrollView } from 'react-native';
+import { sendPushNotification } from "./sendPushNotification";
+import { useStore } from "_store";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -12,128 +15,64 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  const [expoPushToken, setExpoPushToken] = useState("");
-  const [notification, setNotification] = useState(false);
-  const [titleNotification, onChangeTitleNotification] = useState("FireGroup");
-  const [bodyNotification, onChangeBodyNotification] =
-    useState("Hello everyone!!!");
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  const [titleNotification, onChangeTitleNotification] = useState('FireGroup')
+  const [bodyNotification, onChangeBodyNotification] = useState('Hello everyone!!!')
+  const [state] = useStore();
 
-  useEffect(() => {
-    registerForPushNotificationsAsync().then((token) =>
-      setExpoPushToken(token)
-    );
-
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
-
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        // console.log(response.notification.request.content.data);
-      });
-
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "space-around",
-      }}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
     >
-      {/* <Text>Your expo push token: {expoPushToken}</Text> */}
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text>Title:</Text>
-          <TextInput
-            onChangeText={onChangeTitleNotification}
-            value={titleNotification}
-            style={{
-              marginLeft: 10,
-              borderWidth: 1,
-              borderColor: "#c4c4c4",
-              padding: 5,
-              width: 200,
+      <TouchableWithoutFeedback containerStyle={{ justifyContent: 'center', flex: 1, }} accessible={false}>
+        <ScrollView
+          // style={{ height: "100%" }}
+          contentContainerStyle={{
+            // flex: 1,
+            height: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          {/* <Text>Your expo push token: {expoPushToken}</Text> */}
+          <Text style={{ marginBottom: 50, fontSize: 18, fontWeight: '600' }}>Demo Notification</Text>
+
+          <View style={{ alignItems: 'center', justifyContent: 'center', width: '75%' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", width: '100%' }}>
+              <Text>Title:</Text>
+              <TextInput
+                onChangeText={onChangeTitleNotification}
+                value={titleNotification}
+                style={{ marginLeft: 10, borderWidth: 1, borderColor: '#c4c4c4', padding: 5, width: 200, borderRadius: 4 }}
+              />
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", marginTop: 10, width: '100%' }}>
+              <Text>Content:</Text>
+              <TextInput
+                multiline
+                onChangeText={onChangeBodyNotification}
+                value={bodyNotification}
+                style={{ marginLeft: 10, borderWidth: 1, borderColor: '#c4c4c4', padding: 5, width: 200, borderRadius: 4 }}
+              />
+            </View>
+          </View>
+          <TouchableOpacity style={{ marginTop: 50, borderRadius: 5, borderColor: '#0F52BA', backgroundColor: '#0F52BA', padding: 15, paddingHorizontal: 20 }}
+            onPress={async () => {
+              await sendPushNotification(state.expoToken, {
+                title: titleNotification + " 📬",
+                body: bodyNotification.trim(),
+                data: { someData: 'goes here' },
+              })
             }}
-          />
-        </View>
-        <View
-          style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}
-        >
-          <Text>Body:</Text>
-          <TextInput
-            onChangeText={onChangeBodyNotification}
-            value={bodyNotification}
-            style={{
-              marginLeft: 10,
-              borderWidth: 1,
-              borderColor: "#c4c4c4",
-              padding: 5,
-              width: 200,
-            }}
-          />
-        </View>
-      </View>
-      <Button
-        title="Press to push a notification"
-        onPress={async () => {
-          await schedulePushNotification(titleNotification, bodyNotification);
-        }}
-      />
-    </View>
+          >
+            <Text style={{ color: '#fff', fontWeight: '600', fontSize: 16 }}>
+              Press to push a notification
+            </Text>
+          </TouchableOpacity>
+
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+
   );
-}
-
-async function schedulePushNotification(title, body) {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: title + "📬",
-      body: body,
-      data: { data: "goes here" },
-    },
-    trigger: null,
-  });
-}
-
-async function registerForPushNotificationsAsync() {
-  let token;
-
-  if (Platform.OS === "android") {
-    await Notifications.setNotificationChannelAsync("default", {
-      name: "default",
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
-    });
-  }
-
-  if (Device.isDevice) {
-    const { status: existingStatus } =
-      await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== "granted") {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!");
-      return;
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    // console.log(token);
-  } else {
-    alert("Must use physical device for Push Notifications");
-  }
-
-  return token;
 }

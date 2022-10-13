@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "MobileAppShopify",
+    "slug": "MobileAppShopify",
+    "scheme": "om",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/images/splash-img.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+
+    "notification": {
+      "icon": "./src/assets/images/firegroup.jpg"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/images/firegroup.jpg",
+          "color": "#ffffff"
+        }
+      ]
+    ],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "com.mobileshopify.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["lyft"]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/images/favicon.png"
+    },
+    "platforms": ["ios", "android"],
+    "icon": "./src/assets/images/firegroup.jpg"
+  }
+}

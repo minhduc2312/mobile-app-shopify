@@ -7,3 +7,4 @@ export const SET_LOADING = 'SET_LOADING';
 export const ADD_QUANTITY = 'ADD_QUANTITY';
 export const SUB_QUANTITY = 'SUB_QUANTITY';
 export const EMPTY_CART = 'EMPTY_CART';
+export const SET_EXPO_PUSH_TOKEN = 'SET_EXPO_PUSH_TOKEN';
