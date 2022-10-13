@@ -4,14 +4,12 @@ import { Text, StyleSheet } from "react-native";
 
 export default function CustomText(props) {
   const [fontsLoader] = useFonts({
-    TenorSans: require("_assets/fonts/TenorSans-Regular.ttf"),
+    TenorSans: require("../../assets/fonts/TenorSans-Regular.ttf"),
   });
 
   if (!fontsLoader) return null;
 
-  return (
-    <Text style={[styles.defaultStyle, props.style]}>{props.children}</Text>
-  );
+  return <Text style={[styles.defaultStyle, props.style]}>{props.children}</Text>;
 }
 
 const styles = StyleSheet.create({

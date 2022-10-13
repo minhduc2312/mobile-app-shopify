@@ -89,10 +89,7 @@ const Login = (props) => {
       .catch((error) => console.log(error));
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={styles.inner}>
@@ -119,22 +116,12 @@ const Login = (props) => {
                   },
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    style={styles.input}
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                    placeholder="Email"
-                  />
+                  <TextInput style={styles.input} onBlur={onBlur} onChangeText={onChange} value={value} placeholder="Email" />
                 )}
                 name="email"
               />
               {/* Email Error */}
-              {errors.email && (
-                <CustomText style={styles.inputError}>
-                  {errors.email.message || "Email is required."}
-                </CustomText>
-              )}
+              {errors.email && <CustomText style={styles.inputError}>{errors.email.message || "Email is required."}</CustomText>}
 
               <Controller
                 control={control}
@@ -153,11 +140,7 @@ const Login = (props) => {
                 )}
                 name="password"
               />
-              {errors.password && (
-                <CustomText style={styles.inputError}>
-                  Password is required.
-                </CustomText>
-              )}
+              {errors.password && <CustomText style={styles.inputError}>Password is required.</CustomText>}
 
               {/* Redirect to Register */}
               <View
@@ -188,12 +171,7 @@ const Login = (props) => {
                 alignItems: "center",
               }}
             >
-              <BlackCustomButton
-                style={styles.submitButton}
-                color="#000000"
-                title="Login"
-                onPress={handleSubmit(onSubmit)}
-              />
+              <BlackCustomButton style={styles.submitButton} color="#000000" title="Login" onPress={handleSubmit(onSubmit)} />
             </View>
           </View>
         </ScrollView>
@@ -208,6 +186,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
+  },
+  inner: {
+    padding: 24,
+    flex: 1,
+    justifyContent: "space-around",
   },
   // Header
   loginHeader: {

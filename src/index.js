@@ -9,6 +9,7 @@ import MainTabScreen from "./navigation/MainTabScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { LoginScreen, ProductScreen, RegisterScreen } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
+import CheckOutScreen from "./screens/CheckOut";
 import BraceletScreen from "./screens/Home/pages/CategoriesSubMenu/Bracelet";
 import EarringScreen from "_screens/Home/pages/CategoriesSubMenu/Earring";
 import NecklaceScreen from "_screens/Home/pages/CategoriesSubMenu/Necklace";
@@ -29,13 +30,7 @@ const MainDrawer = () => (
     initialRouteName="HomeDrawer"
     screenOptions={{
       headerShown: false,
-      headerTitle: () => (
-        <Image
-          source={require("_assets/images/shopLogo.png")}
-          style={{ height: "80%" }}
-          resizeMode="contain"
-        />
-      ),
+      headerTitle: () => <Image source={require("_assets/images/shopLogo.png")} style={{ height: "80%" }} resizeMode="contain" />,
       headerTitleAlign: "center",
       headerRight: ({ }) => (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
@@ -45,11 +40,7 @@ const MainDrawer = () => (
       )
     }}
   >
-    <Drawer.Screen
-      name="HomeDrawer"
-      component={MainTabScreen}
-      options={{ headerShown: true }}
-    />
+    <Drawer.Screen name="HomeDrawer" component={MainTabScreen} options={{ headerShown: true }} />
   </Drawer.Navigator>
 );
 
@@ -80,35 +71,25 @@ export default function App() {
           screenOptions={{
             headerTitleAlign: "center",
 
-            headerTitle: () => (
-              <Image
-                source={require("_assets/images/shopLogo.png")}
-                style={{ height: "80%" }}
-                resizeMode="contain"
-              />
-            ),
-            headerLeftLabelVisible: false,
+            headerTitle: () => <Image source={require("_assets/images/shopLogo.png")} style={{ height: "80%" }} resizeMode="contain" />,
             headerRight: ({ }) => (
-              <View style={{ flexDirection: 'row', marginRight: 10 }}>
+              <View style={{ flexDirection: "row", marginRight: 10 }}>
                 <Notification />
                 <CartIcon />
               </View>
             )
           }}
         >
-          <MainStack.Screen
-            name="MainScreen"
-
-            component={MainDrawer}
-            options={{ headerShown: false, title: "Home" }}
-          />
-          <MainStack.Screen name="Product" component={ProductScreen} options={{ headerShown: false, }} />
+          <MainStack.Screen name="MainScreen" component={MainDrawer} options={{ headerShown: false, title: "Home" }} />
+          <MainStack.Screen name="Product" component={ProductScreen} options={{ headerShown: false }} />
+          {/* <MainStack.Screen name="PlaceOrder" component={PlaceOrderScreen} options={{ headerShown: false }} /> */}
           <MainStack.Screen name="Bracelet" component={BraceletScreen} />
           <MainStack.Screen name="Earring" component={EarringScreen} />
           <MainStack.Screen name="Necklace" component={NecklaceScreen} />
-          <MainStack.Screen name="Others" component={OthersScreen} />
+          <MainStack.Screen name="Others" component={CheckOutScreen} options={{ headerShown: false }} />
           <MainStack.Screen name="LoginScreen" component={LoginScreen} />
           <MainStack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <MainStack.Screen name="CheckOutScreen" component={CheckOutScreen} options={{ headerShown: false }} />
         </MainStack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
