@@ -1,28 +1,39 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { StyleSheet, Image, View, Text } from "react-native";
+import { CheckOutScreen, PlaceOrderScreen, PaymentScreen, ReviewScreen } from "./pages";
+import Notification from "../../components/Notification";
+import CartIcon from "../../components/CartIcon";
 
-const Stack = createStackNavigator();
+const CheckOutStack = createStackNavigator();
 
-const ChechOut = (props) => (
-  <View style={styles.container}>
-    <Text>ChechOut</Text>
-  </View>
-);
-
-const ChechOutStackNavigator = () => {
+const CheckOutStackScreen = ({}) => {
   return (
-    <Stack.Navigator
+    <CheckOutStack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitle: () => <Image source={require("_assets/images/shopLogo.png")} style={{ height: "80%" }} resizeMode="contain" />,
+        headerStyle: {
+          borderBottomWidth: 0,
+        },
+        headerTitleAlign: "center",
+        headerLeftLabelVisible: null,
+        headerRight: ({}) => (
+          <View style={{ flexDirection: "row", marginRight: 10 }}>
+            <Notification />
+            <CartIcon />
+          </View>
+        ),
       }}
     >
-      <Stack.Screen name="ChechOut" component={ChechOut} />
-    </Stack.Navigator>
+      <CheckOutStack.Screen name="CheckOutScreen" component={CheckOutScreen} />
+      <CheckOutStack.Screen name="PlaceOrderScreen" component={PlaceOrderScreen} />
+      <CheckOutStack.Screen name="PaymentScreen" component={PaymentScreen} />
+      <CheckOutStack.Screen name="ReviewScreen" component={ReviewScreen} />
+    </CheckOutStack.Navigator>
   );
 };
-
-export default ChechOutStackNavigator;
+export default CheckOutStackScreen;
 
 const styles = StyleSheet.create({
   container: {
