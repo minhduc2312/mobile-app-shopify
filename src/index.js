@@ -1,7 +1,6 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { Image, StyleSheet, StatusBar, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import * as Linking from 'expo-linking';
-
 import DrawerContent from "_navigation/DrawerNavigator/DrawerContent";
 import MainTabScreen from "./navigation/MainTabScreen";
 
@@ -13,12 +12,17 @@ import CheckOutScreen from "./screens/CheckOut";
 import BraceletScreen from "./screens/Home/pages/CategoriesSubMenu/Bracelet";
 import EarringScreen from "_screens/Home/pages/CategoriesSubMenu/Earring";
 import NecklaceScreen from "_screens/Home/pages/CategoriesSubMenu/Necklace";
-import OthersScreen from "_screens/Home/pages/CategoriesSubMenu/Others";
+
 import Notification from "_components/Notification";
-import { useStore } from "./store";
+import { emptyCart, useStore } from "./store";
 import CartIcon from '_components/CartIcon'
 import { useEffect } from "react";
 import RegisterNotification from "_screens/Notification/RegisterNotification";
+
+import { getCheckoutItem } from "./helper/getCheckoutItem";
+import { handleAddToCart } from "./helper/handleAddToCart";
+import axios from "_plugins/axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 const MainStack = createStackNavigator();
@@ -59,6 +63,43 @@ export default function App() {
       }
     }
   }
+
+  useEffect(() => {
+    const getCartItems = async () => {
+      //get variants item in checkout 
+      const checkout = await getCheckoutItem();
+      checkout.line_items.map(item => {
+        handleAddToCart(state, dispatch, item.variant_id, item.quantity) //add item to cart local
+      })
+    }
+    getCartItems()
+    return () => {
+      dispatch(emptyCart())
+    }
+  }, [])
+  useEffect(() => {
+
+    const updateCart = async () => {
+      const checkoutToken = await AsyncStorage.getItem('OMDP:checkout_token')
+
+      const data = {
+        checkout: {
+          line_items: [
+            ...state.cart.map(item => {
+              return {
+                variant_id: item.id,
+                quantity: item.quantity
+              }
+            })
+          ]
+        }
+      }
+      axios.put(`/admin/api/2022-10/checkouts/${checkoutToken}.json`, JSON.stringify(data))
+    }
+    updateCart();
+
+
+  }, [state.cart])
   return (
     <NavigationContainer style={styles.container}
       linking={linking}

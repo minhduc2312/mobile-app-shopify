@@ -15,7 +15,8 @@
       "_plugins": ["src/plugins/*"],
       "_store": ["src/store/*"],
       "_config": ["src/config/*"],
-      "_hooks": ["src/hooks/*"]
+      "_hooks": ["src/hooks/*"],
+      "_helper": ["src/helper/*"]
     }
   }
 }

@@ -9,19 +9,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { addQuantity } from "_store";
-import { addToCart, useStore } from "_store";
+import { handleAddToCart } from "_helper/handleAddToCart";
+import { useStore } from "_store";
 
-export const handleAddToCart = (state, dispatch, id) => {
-  const inCart = state?.cart?.some((item) => item.id === id);
-  if (inCart) {
-    dispatch(addQuantity(id));
-    console.log(state.cart);
-    return;
-  }
-  dispatch(addToCart(id));
-  // console.log(addtoCart)
-};
+
 const ProductItem = ({ item, navigation }) => {
   const [state, dispatch] = useStore();
 
@@ -59,7 +50,7 @@ const ProductItem = ({ item, navigation }) => {
 
             <TouchableHighlight
               underlayColor="#bdcbe7"
-              onPress={() => handleAddToCart(state, dispatch, item.id)}
+              onPress={() => handleAddToCart(state, dispatch, item.variants[0].id)}
               style={{
                 padding: 10,
                 borderColor: "#4267B2",

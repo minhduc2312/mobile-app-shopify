@@ -7,7 +7,7 @@ import CartIcon from "../../components/CartIcon";
 
 const CheckOutStack = createStackNavigator();
 
-const CheckOutStackScreen = ({}) => {
+const CheckOutStackScreen = ({ }) => {
   return (
     <CheckOutStack.Navigator
       screenOptions={{
@@ -18,7 +18,7 @@ const CheckOutStackScreen = ({}) => {
         },
         headerTitleAlign: "center",
         headerLeftLabelVisible: null,
-        headerRight: ({}) => (
+        headerRight: ({ }) => (
           <View style={{ flexDirection: "row", marginRight: 10 }}>
             <Notification />
             <CartIcon />
@@ -26,7 +26,7 @@ const CheckOutStackScreen = ({}) => {
         ),
       }}
     >
-      <CheckOutStack.Screen name="CheckOutScreen" component={CheckOutScreen} />
+      <CheckOutStack.Screen name="CheckOutHomeScreen" component={CheckOutScreen} />
       <CheckOutStack.Screen name="PlaceOrderScreen" component={PlaceOrderScreen} />
       <CheckOutStack.Screen name="PaymentScreen" component={PaymentScreen} />
       <CheckOutStack.Screen name="ReviewScreen" component={ReviewScreen} />

@@ -8,18 +8,20 @@ export const setLoading = (payload) => ({
     type: SET_LOADING,
     payload
 })
-export const addToCart = (id) => ({
+export const addToCart = (id, quantity = 1) => ({
     type: ADD_TO_CART,
-    id
+    id,
+    quantity
 })
 export const removeFromCart = (id) => ({
     type: REMOVE_FROM_CART,
     id
 })
 
-export const addQuantity = (id) => ({
+export const addQuantity = (id, quantity = 1) => ({
     type: ADD_QUANTITY,
-    id
+    id,
+    quantity
 })
 export const subQuantity = (id) => ({
     type: SUB_QUANTITY,

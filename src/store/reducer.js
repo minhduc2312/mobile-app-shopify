@@ -25,7 +25,7 @@ function reducer(state, action) {
                 ...state,
                 cart: [...state.cart, {
                     id: action.id,
-                    quantity: 1
+                    quantity: action.quantity
                 }]
             }
         case REMOVE_FROM_CART:
@@ -36,7 +36,7 @@ function reducer(state, action) {
         case ADD_QUANTITY:
             return {
                 ...state,
-                cart: state.cart.map(item => item.id == action.id ? { ...item, quantity: item.quantity + 1 } : item)
+                cart: state.cart.map(item => item.id == action.id ? { ...item, quantity: item.quantity + action.quantity } : item)
             }
         case SUB_QUANTITY:
             return {

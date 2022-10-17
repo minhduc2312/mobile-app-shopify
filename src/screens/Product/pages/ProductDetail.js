@@ -10,8 +10,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 import axios from "_plugins/axios";
-import { handleAddToCart } from "../components/ProductItem";
-import { addToCart } from "_store";
+import { handleAddToCart } from "_helper/handleAddToCart";
 import { useStore } from "_store";
 const convertHTMLtoString = (string) => {
   return string.replace(/<[^>]+>/g, "");
@@ -75,11 +74,11 @@ const ProductDetail = ({ route, navigation }) => {
 
           <View style={styles.infoItem}>
             <View style={{ height: 100, justifyContent: 'space-around' }}>
-              <Text style={[styles.detailText, { color: "#DD8560" }]}>Price {productItem?.variants[selectedItem].price}</Text>
-              <Text style={[styles.detailText, { color: "#555555" }]}>Color: {productItem?.variants[selectedItem].title}</Text>
+              <Text style={[styles.detailText, { color: "#DD8560" }]}>Price $ {productItem?.variants[selectedItem].price}</Text>
+              <Text style={[styles.detailText, { color: "#555555" }]}>Type: {productItem?.variants[selectedItem].title}</Text>
             </View>
 
-            <TouchableOpacity style={styles.buttonCart} onPress={() => handleAddToCart(state, dispatch, productItem.id)}>
+            <TouchableOpacity style={styles.buttonCart} onPress={() => handleAddToCart(state, dispatch, productItem.variants[selectedItem].id)}>
               <Text style={styles.buttonCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>

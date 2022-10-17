@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity, FlatList, Image } from "react-native";
 import CartItem from "./components/CartItem";
 import { useStore } from "_store";
+import { getCheckoutItem } from "_helper/getCheckoutItem";
+
 
 const CartScreen = ({ navigation }) => {
   const [state, dispatch] = useStore();
   const { cart, products } = state;
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalTax, setTotalTax] = useState(0)
   const getTotalPrice = products.reduce((prev, curr) => {
-    const item = cart.find((item) => item.id === curr.id);
+    const item = cart.find((item) => curr.variants.find(variant => variant.id === item.id));
     if (item) {
       return prev + curr.variants[0].price * item.quantity;
     }
     return prev;
   }, 0);
+  useEffect(() => {
+    const getCheckout = async () => {
+      const checkoutItem = await getCheckoutItem();
+      setTotalPrice(checkoutItem.total_price);
+      setTotalTax(checkoutItem.total_tax)
+    }
+    getCheckout()
+  }, [])
+
   return cart.length ? (
     <View style={styles.container}>
       <View
@@ -43,7 +56,7 @@ const CartScreen = ({ navigation }) => {
         }}
         data={cart}
         renderItem={({ item }) => (
-          <CartItem key={item.id} items={products.find((product) => product.id == item.id)} quantity={item.quantity} />
+          <CartItem key={item.id} items={products.find((product) => product.variants.find(variant => variant.id == item.id))} variantId={item.id} quantity={item.quantity} />
         )}
         keyExtractor={(item) => item.id}
       />
@@ -53,7 +66,7 @@ const CartScreen = ({ navigation }) => {
           <View style={{ paddingHorizontal: 10 }}>
             <View style={styles.orderDetail}>
               <Text>Cart total</Text>
-              <Text>$ {getTotalPrice}</Text>
+              <Text>$ {totalPrice - totalTax}</Text>
             </View>
             <View style={styles.orderDetail}>
               <Text>Discount</Text>
@@ -61,11 +74,11 @@ const CartScreen = ({ navigation }) => {
             </View>
             <View style={styles.orderDetail}>
               <Text>Total Tax</Text>
-              <Text>$ 0,00</Text>
+              <Text>$ {totalTax}</Text>
             </View>
             <View style={[styles.orderDetail, { borderTopWidth: 0.8, paddingVertical: 10 }]}>
               <Text>Total Payment</Text>
-              <Text>$ {getTotalPrice}</Text>
+              <Text>$ {totalPrice}</Text>
             </View>
           </View>
         </View>

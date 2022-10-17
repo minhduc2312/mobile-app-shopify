@@ -5,9 +5,9 @@ import { subQuantity } from "_store";
 import { addQuantity } from "_store";
 import { useStore } from "_store";
 
-const CartItem = ({ items, quantity }) => {
+const CartItem = ({ items, quantity, variantId }) => {
   const [state, dispatch] = useStore();
-
+  const variantItem = items.variants.find(variant => variant.id == variantId)
   const handleIncrease = (id) => {
     dispatch(addQuantity(id));
   };
@@ -25,13 +25,16 @@ const CartItem = ({ items, quantity }) => {
         <View>
           <Text>{items?.title}</Text>
           <Text style={{ fontWeight: "bold" }}>
-            $ {items.variants[0].price}
+            $ {variantItem.price}
+          </Text>
+          <Text >
+            {variantItem.title == 'Default Title' ? null : `Type: ${variantItem.title}`}
           </Text>
         </View>
         <View style={styles.quantity}>
           <TouchableOpacity
             style={[styles.quantityButton, styles.decreaseButton]}
-            onPress={() => handleDecrease(items.id)}
+            onPress={() => handleDecrease(variantItem.id)}
           >
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
@@ -39,7 +42,7 @@ const CartItem = ({ items, quantity }) => {
 
           <TouchableOpacity
             style={[styles.quantityButton, styles.increaseButton]}
-            onPress={() => handleIncrease(items.id)}
+            onPress={() => handleIncrease(variantItem.id)}
           >
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>

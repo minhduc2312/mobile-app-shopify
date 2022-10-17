@@ -36,7 +36,6 @@ const LoginStackNavigator = ({ navigation }) => {
       const { token } = doc.data();
       tokens.push(token);
     });
-    console.log(tokens);
   };
   getData();
 

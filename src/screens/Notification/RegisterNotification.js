@@ -69,7 +69,7 @@ async function registerForPushNotificationsAsync() {
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        // setDataFireBase("expo-tokens", token)
+        setDataFireBase("user-information", token)
     } else {
         alert('Must use physical device for Push Notifications');
     }

@@ -4,6 +4,8 @@ import { useForm, Controller } from "react-hook-form";
 // Components
 import CustomText from "../../../components/customText/CustomText";
 import BlackCustomButton from "../../../components/blackCustomButton/BlackCustomButton";
+import { getCheckoutItem } from "_helper/getCheckoutItem";
+import axios from "_plugins/axios";
 const PlaceOrderScreen = ({ navigation }) => {
   const {
     control,
@@ -15,13 +17,33 @@ const PlaceOrderScreen = ({ navigation }) => {
       lastName: "",
       address: "",
       city: "",
-      state: "",
       zipCode: "",
       phoneNumber: "",
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const { token: checkoutToken } = await getCheckoutItem();
+    const body = {
+      checkout: {
+        shipping_address: {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          "phone": data.phoneNumber,
+          "address1": data.address,
+          "city": data.city,
+          "zip": data.zipCode,
+          "country": "Vietnam",
+          "country_code": "VN",
+        }
+
+      }
+    }
+    if (checkoutToken) {
+      axios.put(`/admin/api/2022-10/checkouts/${checkoutToken}.json`, JSON.stringify(body))
+        .then(res => navigation.goBack()).catch(err => alert('Something went wrong'))
+    }
+  }
 
   return (
     <KeyboardAvoidingView

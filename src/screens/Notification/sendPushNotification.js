@@ -2,7 +2,6 @@ import { getDataFromFireBase } from "_utils";
 
 
 export async function sendPushNotification(expoPushToken, config = { title: "Title Notification", body: "Content Notification !!!!" }) {
-    console.log('hello')
     const listTokens = await getDataFromFireBase('expo-tokens');
     listTokens.map(async ({ token }) => {
         const message = {
